@@ -26,6 +26,14 @@ export default abstract class BaseComponent {
   public get classList(): string[] {
     return this._classList;
   }
+  public appendClasses(...c: string[]) {
+    this._classList = this._classList.concat(c);
+  }
+
+  protected _styleList: Record<string, string> = {};
+  public setStyle(k: string, v: string) {
+    this._styleList[k] = v;
+  }
 
   public abstract readonly tagName: string;
   protected readonly hasClosingTag = true;
@@ -33,9 +41,7 @@ export default abstract class BaseComponent {
   protected _innerComponents: InnerComponentList = [];
 
   public appendComponents(...c: InnerComponentList) {
-    c.forEach((comp) => {
-      this._innerComponents.push(comp);
-    });
+    this._innerComponents = this._innerComponents.concat(c);
   }
 
   private _innerText: string = "";
@@ -69,7 +75,17 @@ export default abstract class BaseComponent {
     if (this._id) {
       this._attributeList.id = this._id;
     }
+
+    // Append classes to the attributes
     this._attributeList.class = this._classList.join(" ");
+
+    // Append styles to the attributes
+    let styles = "";
+    Object.entries(this._styleList).forEach(([key, value]) => {
+      styles += `${key}:${value};`;
+    });
+    this._attributeList.style = styles;
+
     const attributes = this.attributesToString();
     let html = "<" + this.tagName + (attributes ? " " + attributes : "") + ">";
     if (this.hasClosingTag) {
