@@ -4,57 +4,50 @@ import Container from "../components/Container";
 import Form from "../components/Form";
 import Input from "../components/Input";
 import BaseController from "./BaseController";
+import { json } from "stream/consumers";
+import LoginForm from "../components/combinedComponents/LoginForm";
 
 export default class AuthController extends BaseController {
   public get(_req: Request, res: Response) {
     try {
-      const usernameInput = new Input();
-      usernameInput.id = "username";
-      usernameInput.type = "text";
-      usernameInput.placeholder = "Username";
-      usernameInput.appendClasses("form-control");
+      const loginForm = new LoginForm();
 
-      const usernameContainer = new Container();
-      usernameContainer.appendClasses("mb-3");
-      usernameContainer.appendComponents(usernameInput);
+      res.send(this.wrapHTML([loginForm.render()], false));
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 
-      const passwordInput = new Input();
-      passwordInput.id = "password";
-      passwordInput.type = "password";
-      passwordInput.placeholder = "Password";
-      passwordInput.appendClasses("form-control");
+  public async login(req: Request, res: Response) {
+    try {
+      const response = await fetch("http://localhost:3002/auth/login", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: req.body.username,
+          password: req.body.password
+        })
+      });
 
-      const passwordContainer = new Container();
-      passwordContainer.appendClasses("mb-3");
-      passwordContainer.appendComponents(passwordInput);
+      const result = await response.json();
 
-      const submitButton = new Button();
-      submitButton.innerText = "Login";
-      submitButton.type = "submit";
+      if (!result.token) {
+        const loginForm = new LoginForm("bla");
+        res.send(this.wrapHTML([loginForm.render()]));
+        return;
+      }
 
-      const loginForm = new Form();
-      loginForm.action = "/auth/login";
-      loginForm.method = "POST";
-      loginForm.appendComponents(
-        usernameContainer,
-        passwordContainer,
-        submitButton
-      );
+      res.cookie("token", result.token);
 
-      const loginContainer = new Container();
-      loginContainer.setStyle("position", "absolute");
-      loginContainer.setStyle("top", "50%");
-      loginContainer.setStyle("left", "50%");
-      loginContainer.setStyle("transform", "translate(-50%,-50%)");
-      loginContainer.appendComponents(loginForm);
-
-      res.send(this.wrapHTML([loginContainer.render()], false));
+      res.redirect("/dashboard");
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
   public logout(_req: Request, res: Response) {
-    // Log out current user
+    res.clearCookie("token").redirect("/auth/login?logout=1");
   }
 }

@@ -38,6 +38,10 @@ export default class Input extends BaseComponent {
     this._placeholder = p;
   }
 
+  public set name(n: string) {
+    this._attributeList.name = n;
+  }
+
   private _label: Label | undefined;
   // public set label(Label)
 

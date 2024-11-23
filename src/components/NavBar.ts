@@ -10,6 +10,7 @@ export default class NavBar extends BaseComponent {
     const logoutButton = new Button();
     logoutButton.bsType = "link";
     logoutButton.innerText = "Logout";
+    logoutButton.type = "submit";
 
     const logoutForm = new Form();
     logoutForm.action = "/auth/logout";
@@ -23,7 +24,7 @@ export default class NavBar extends BaseComponent {
 				Server Kicker
 			</a>
  			<div class="d-flex">
-				${logoutButton.render()}
+				${logoutForm.render()}
       </div>
 		</div>`);
 
