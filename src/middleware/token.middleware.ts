@@ -8,7 +8,7 @@ export default async function token(
   const token = req.cookies.token;
 
   if (!token) {
-    return res.redirect("/auth/login?no_token=1");
+    return res.redirect("/auth/login");
   }
 
   fetch(`http://localhost:3002/auth/validate?token=${token}`).then(

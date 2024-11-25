@@ -1,12 +1,17 @@
 import { Router } from "express";
-import AuthController from "../controller/AuthController";
+import LoginController from "../controller/LoginController";
+import RegisterController from "../controller/RegisterController";
 
 const router = Router();
-const authController = new AuthController();
+const loginController = new LoginController();
+const registerController = new RegisterController();
 
-router.get("/login", (req, res) => authController.get(req, res));
+router.get("/login", (req, res) => loginController.get(req, res));
+router.post("/login", (req, res) => loginController.login(req, res));
 
-router.post("/login", (req, res) => authController.login(req, res));
-router.post("/logout", (req, res) => authController.logout(req, res));
+router.get("/register", (req, res) => registerController.get(req, res));
+router.post("/register", (req, res) => registerController.register(req, res));
+
+router.post("/logout", (req, res) => loginController.logout(req, res));
 
 export default router;

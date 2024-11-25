@@ -1,0 +1,14 @@
+body {
+  background-color: #101217;
+}
+
+.auth-form {
+  transform: translate(-50%, -50%);
+  top: 50%;
+  position: absolute;
+  width: 300px;
+  border: 1px solid aqua;
+  border-radius: 10px;
+  box-shadow: aqua 0px 0px 5px;
+  left: 50%;
+}

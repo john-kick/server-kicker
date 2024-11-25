@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
-import Button from "../components/Button";
-import Container from "../components/Container";
-import Form from "../components/Form";
-import Input from "../components/Input";
-import BaseController from "./BaseController";
-import { json } from "stream/consumers";
 import LoginForm from "../components/combinedComponents/LoginForm";
+import BaseController from "./BaseController";
+import RegisterForm from "../components/combinedComponents/RegisterForm";
 
 export default class AuthController extends BaseController {
   public get(_req: Request, res: Response) {
@@ -20,34 +16,45 @@ export default class AuthController extends BaseController {
 
   public async login(req: Request, res: Response) {
     try {
+      const { username, password } = req.body;
+
       const response = await fetch("http://localhost:3002/auth/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          username: req.body.username,
-          password: req.body.password
+          username,
+          password
         })
       });
 
       const result = await response.json();
 
-      if (!result.token) {
-        const loginForm = new LoginForm("bla");
-        res.send(this.wrapHTML([loginForm.render()]));
+      if (!response.ok) {
+        const loginForm = new LoginForm(result.message);
+        res.send(this.wrapHTML([loginForm.render()], false));
         return;
       }
 
       res.cookie("token", result.token);
+      res.cookie(
+        "user",
+        JSON.stringify({
+          username: result.username,
+          role: result.role,
+          id: result.id
+        })
+      );
 
       res.redirect("/dashboard");
     } catch (error) {
+      console.error;
       res.status(500).json(error);
     }
   }
 
   public logout(_req: Request, res: Response) {
-    res.clearCookie("token").redirect("/auth/login?logout=1");
+    res.clearCookie("token").redirect("/auth/login");
   }
 }

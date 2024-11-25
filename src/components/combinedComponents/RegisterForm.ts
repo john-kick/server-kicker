@@ -8,7 +8,7 @@ import Paragraph from "../Paragraph";
 import Span from "../Span";
 import BaseCombinedComponent from "./BaseCombinedComponent";
 
-export default class LoginForm extends BaseCombinedComponent {
+export default class RegisterForm extends BaseCombinedComponent {
   loginContainer: Container;
 
   public constructor(message?: string) {
@@ -16,10 +16,9 @@ export default class LoginForm extends BaseCombinedComponent {
 
     const loginHeader = new Header(4);
     loginHeader.appendClasses("mb-3");
-    loginHeader.innerText = "Login";
+    loginHeader.innerText = "Register";
 
     const usernameInput = new Input();
-    usernameInput.id = "username";
     usernameInput.type = "text";
     usernameInput.name = "username";
     usernameInput.placeholder = "Username";
@@ -30,7 +29,6 @@ export default class LoginForm extends BaseCombinedComponent {
     usernameContainer.appendComponents(usernameInput);
 
     const passwordInput = new Input();
-    passwordInput.id = "password";
     passwordInput.type = "password";
     passwordInput.name = "password";
     passwordInput.placeholder = "Password";
@@ -40,27 +38,38 @@ export default class LoginForm extends BaseCombinedComponent {
     passwordContainer.appendClasses("mb-3");
     passwordContainer.appendComponents(passwordInput);
 
+    const passwordRepetitionInput = new Input();
+    passwordRepetitionInput.type = "password";
+    passwordRepetitionInput.name = "passwordRepetition";
+    passwordRepetitionInput.placeholder = "Password repetition";
+    passwordRepetitionInput.appendClasses("form-control");
+
+    const passwordRepetitionContainer = new Container();
+    passwordRepetitionContainer.appendClasses("mb-3");
+    passwordRepetitionContainer.appendComponents(passwordRepetitionInput);
+
     const submitButton = new Button();
-    submitButton.innerText = "Login";
+    submitButton.innerText = "Register";
     submitButton.type = "submit";
     submitButton.appendClasses("mb-2");
 
-    const registerAnchor = new Anchor();
-    registerAnchor.href = "/auth/register";
-    registerAnchor.innerText = "Register";
+    const loginAnchor = new Anchor();
+    loginAnchor.href = "/auth/login";
+    loginAnchor.innerText = "Login";
 
     const paragraph = new Paragraph();
     paragraph.appendClasses("mb-2");
-    paragraph.appendComponents("Don't have an account yet? ", registerAnchor);
+    paragraph.appendComponents("Already have an account? ", loginAnchor);
 
     const loginForm = new Form();
-    loginForm.action = "/auth/login";
+    loginForm.action = "/auth/register";
     loginForm.method = "POST";
     loginForm.appendClasses("auth-form", "p-3");
     loginForm.appendComponents(
       loginHeader,
       usernameContainer,
       passwordContainer,
+      passwordRepetitionContainer,
       submitButton,
       paragraph
     );
