@@ -1,14 +1,12 @@
 import { Request, Response } from "express";
-import LoginForm from "../components/combinedComponents/LoginForm";
+import Login from "../pages/Login";
 import BaseController from "./BaseController";
-import RegisterForm from "../components/combinedComponents/RegisterForm";
 
 export default class AuthController extends BaseController {
   public get(_req: Request, res: Response) {
     try {
-      const loginForm = new LoginForm();
-
-      res.send(this.wrapHTML([loginForm.render()], false));
+      const loginPage = new Login();
+      res.send(loginPage.render());
     } catch (error) {
       res.status(500).json(error);
     }
@@ -32,8 +30,8 @@ export default class AuthController extends BaseController {
       const result = await response.json();
 
       if (!response.ok) {
-        const loginForm = new LoginForm(result.message);
-        res.send(this.wrapHTML([loginForm.render()], false));
+        const loginPage = new Login();
+        res.send(loginPage.render({ message: result.message }));
         return;
       }
 

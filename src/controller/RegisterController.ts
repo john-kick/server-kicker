@@ -1,12 +1,12 @@
-import RegisterForm from "../components/combinedComponents/RegisterForm";
-import BaseController from "./BaseController";
 import { Request, Response } from "express";
+import Register from "../pages/Register";
+import BaseController from "./BaseController";
 
 export default class RegisterController extends BaseController {
   public async get(_req: Request, res: Response) {
     try {
-      const registerForm = new RegisterForm();
-      res.send(this.wrapHTML([registerForm.render()], false));
+      const registerPage = new Register();
+      res.send(registerPage.render());
     } catch (error) {
       console.error(error);
       res.status(500).json(error);
@@ -20,8 +20,8 @@ export default class RegisterController extends BaseController {
       const msg = this.validate(username, password, passwordRepetition);
 
       if (msg) {
-        const registerForm = new RegisterForm(msg);
-        res.send(this.wrapHTML([registerForm.render()], false));
+        const registerPage = new Register();
+        res.send(registerPage.render({ message: msg }));
         return;
       }
 
@@ -39,8 +39,8 @@ export default class RegisterController extends BaseController {
       const result = await response.json();
 
       if (!response.ok) {
-        const loginForm = new RegisterForm(result.message);
-        res.send(this.wrapHTML([loginForm.render()]));
+        const registerPage = new Register();
+        res.send(registerPage.render({ message: result.message }));
         return;
       }
 

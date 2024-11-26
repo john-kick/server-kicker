@@ -1,4 +1,4 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 
 type BootstrapButtonType =
   | "primary"
@@ -13,7 +13,7 @@ type BootstrapButtonType =
 
 type BootstrapButtonSize = "normal" | "large" | "small";
 
-export default class Button extends BaseComponent {
+export default class Button extends Component {
   public readonly tagName: string = "button";
   private _bsType: BootstrapButtonType = "primary";
   public set bsType(t: BootstrapButtonType) {

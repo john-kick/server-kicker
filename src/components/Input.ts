@@ -1,4 +1,4 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 import Label from "./Label";
 
 type InputType =
@@ -25,7 +25,7 @@ type InputType =
   | "url"
   | "week";
 
-export default class Input extends BaseComponent {
+export default class Input extends Component {
   public readonly tagName: string = "input";
 
   private _type: InputType = "text";

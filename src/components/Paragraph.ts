@@ -1,5 +1,5 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 
-export default class Paragraph extends BaseComponent {
+export default class Paragraph extends Component {
   public tagName: string = "p";
 }

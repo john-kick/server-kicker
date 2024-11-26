@@ -1,5 +1,5 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 
-export default class Span extends BaseComponent {
+export default class Span extends Component {
   public tagName: string = "span";
 }

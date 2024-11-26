@@ -1,6 +1,6 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 
-export default class Header extends BaseComponent {
+export default class Header extends Component {
   public tagName: string = "h";
 
   public constructor(type: 1 | 2 | 3 | 4 | 5 | 6) {

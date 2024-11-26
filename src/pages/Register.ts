@@ -1,19 +1,22 @@
-import Anchor from "../Anchor";
-import Button from "../Button";
-import Container from "../Container";
-import Form from "../Form";
-import Header from "../Header";
-import Input from "../Input";
-import Paragraph from "../Paragraph";
-import Span from "../Span";
-import BaseCombinedComponent from "./BaseCombinedComponent";
+import Anchor from "../components/Anchor";
+import Button from "../components/Button";
+import Container from "../components/Container";
+import Form from "../components/Form";
+import Header from "../components/Header";
+import Input from "../components/Input";
+import Paragraph from "../components/Paragraph";
+import Span from "../components/Span";
+import BasePage, { PageParams } from "./BasePage";
 
-export default class RegisterForm extends BaseCombinedComponent {
-  loginContainer: Container;
+interface RegisterParams extends PageParams {
+  message?: string;
+}
 
-  public constructor(message?: string) {
-    super();
+export default class Register extends BasePage {
+  protected path: string = "/auth/register";
+  protected renderNavBar: boolean = false;
 
+  protected build(params?: RegisterParams): void {
     const loginHeader = new Header(4);
     loginHeader.appendClasses("mb-3");
     loginHeader.innerText = "Register";
@@ -74,23 +77,21 @@ export default class RegisterForm extends BaseCombinedComponent {
       paragraph
     );
 
-    if (message) {
+    if (params && params.message) {
       const messageComponent = new Span();
-      messageComponent.innerText = message;
+      messageComponent.innerText = params.message;
       messageComponent.setStyle("color", "red");
 
       loginForm.appendComponents(messageComponent);
     }
 
-    this.loginContainer = new Container();
-    this.loginContainer.setStyle("position", "absolute");
-    this.loginContainer.setStyle("top", "50%");
-    this.loginContainer.setStyle("left", "50%");
-    this.loginContainer.setStyle("transform", "translate(-50%,-50%)");
-    this.loginContainer.appendComponents(loginForm);
-  }
+    const loginContainer = new Container();
+    loginContainer.setStyle("position", "absolute");
+    loginContainer.setStyle("top", "50%");
+    loginContainer.setStyle("left", "50%");
+    loginContainer.setStyle("transform", "translate(-50%,-50%)");
+    loginContainer.appendComponents(loginForm);
 
-  public render() {
-    return this.loginContainer.render();
+    this.components.push(loginContainer);
   }
 }

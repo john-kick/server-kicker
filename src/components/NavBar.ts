@@ -1,9 +1,9 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 import Button from "./Button";
 import Anchor from "./Anchor";
 import Form from "./Form";
 
-export default class NavBar extends BaseComponent {
+export default class NavBar extends Component {
   public tagName: string = "nav";
 
   protected preRender(): void {

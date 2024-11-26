@@ -1,5 +1,5 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 
-export default class Container extends BaseComponent {
+export default class Container extends Component {
   public tagName: string = "div";
 }

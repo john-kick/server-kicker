@@ -9,9 +9,9 @@ export type HTMLMethod =
   | "TRACE"
   | "PATCH";
 
-type InnerComponentList = (BaseComponent | string)[];
+export type ComponentList = (Component | string)[];
 
-export default abstract class BaseComponent {
+export default abstract class Component {
   protected _id: string = "";
   public set id(id: string) {
     this._id = id;
@@ -38,9 +38,9 @@ export default abstract class BaseComponent {
   public abstract readonly tagName: string;
   protected readonly hasClosingTag = true;
 
-  protected _innerComponents: InnerComponentList = [];
+  protected _innerComponents: ComponentList = [];
 
-  public appendComponents(...c: InnerComponentList) {
+  public appendComponents(...c: ComponentList) {
     this._innerComponents = this._innerComponents.concat(c);
   }
 

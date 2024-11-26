@@ -1,7 +1,7 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 import Input from "./Input";
 
-export default class Label extends BaseComponent {
+export default class Label extends Component {
   public tagName: string = "label";
 
   private _text: string;

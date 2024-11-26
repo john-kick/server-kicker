@@ -1,6 +1,6 @@
-import BaseComponent, { HTMLMethod } from "./BaseComponent";
+import Component, { HTMLMethod } from "./Component";
 
-export default class Form extends BaseComponent {
+export default class Form extends Component {
   public tagName: string = "form";
 
   public set method(m: HTMLMethod) {

@@ -1,6 +1,6 @@
-import BaseComponent from "./BaseComponent";
+import Component from "./Component";
 
-export default class Anchor extends BaseComponent {
+export default class Anchor extends Component {
   public tagName: string = "a";
 
   public set href(h: string) {
