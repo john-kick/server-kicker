@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import config from "../config";
+import config from "../util/config";
 
 export default async function token(
   req: Request,

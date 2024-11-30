@@ -1,6 +1,6 @@
-import Renderable, { RenderableList } from "../elements/Renderable";
+import Renderable, { RenderableList } from "../interface/Renderable";
 import NavBar from "../elements/NavBar";
-import config from "../config";
+import config from "../util/config";
 
 export default abstract class Page implements Renderable {
   protected abstract path: string;
@@ -34,6 +34,8 @@ export default abstract class Page implements Renderable {
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 			<link rel="stylesheet" href="http://localhost:${config.APP_PORT}/styles.css">
 				<title>Server Kicker</title>
 			</head>

@@ -7,10 +7,8 @@ export default class NavBar extends HTMLElement {
   public tagName: string = "nav";
 
   public preRender(): void {
-    const logoutButton = new Button();
-    logoutButton.bsType = "link";
-    logoutButton.innerText = "Logout";
-    logoutButton.type = "submit";
+    const logoutButton = new Button("Logout", "link");
+    logoutButton.setAttribute("type", "submit");
 
     const logoutForm = new Form();
     logoutForm.action = "/auth/logout";

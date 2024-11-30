@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import config from "../config";
+import config from "../util/config";
 import Login from "../pages/Login";
 import BaseController from "./BaseController";
 

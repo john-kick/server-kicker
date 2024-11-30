@@ -6,7 +6,7 @@ import Header from "../elements/Header";
 import Input from "../elements/Input";
 import Paragraph from "../elements/Paragraph";
 import Span from "../elements/Span";
-import BasePage from "./BasePage";
+import BasePage from "./Page";
 
 export default class Login extends BasePage {
   protected path: string = "/auth/login";
@@ -39,9 +39,8 @@ export default class Login extends BasePage {
     passwordContainer.appendClasses("mb-3");
     passwordContainer.appendComponents(passwordInput);
 
-    const submitButton = new Button();
-    submitButton.innerText = "Login";
-    submitButton.type = "submit";
+    const submitButton = new Button("Login");
+    submitButton.setAttribute("type", "submit");
     submitButton.appendClasses("mb-2");
 
     const registerAnchor = new Anchor();

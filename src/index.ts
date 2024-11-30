@@ -1,9 +1,10 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import path from "node:path";
-import config from "./config";
+import config from "./util/config";
 import authRouter from "./routes/auth.routes";
 import dashboardRouter from "./routes/dashboard.routes";
+import loggerMiddleware from "./middleware/logger.middleware";
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "../public")));
+
+app.use(loggerMiddleware);
 
 app.use("/", dashboardRouter);
 app.use("/auth", authRouter);

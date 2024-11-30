@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Register from "../pages/Register";
 import BaseController from "./BaseController";
-import config from "../config";
+import config from "../util/config";
 
 export default class RegisterController extends BaseController {
   public async get(_req: Request, res: Response) {

@@ -6,7 +6,7 @@ import Header from "../elements/Header";
 import Input from "../elements/Input";
 import Paragraph from "../elements/Paragraph";
 import Span from "../elements/Span";
-import BasePage from "./BasePage";
+import BasePage from "./Page";
 
 export default class Register extends BasePage {
   protected path: string = "/auth/register";
@@ -47,9 +47,8 @@ export default class Register extends BasePage {
     passwordRepetitionContainer.appendClasses("mb-3");
     passwordRepetitionContainer.appendComponents(passwordRepetitionInput);
 
-    const submitButton = new Button();
-    submitButton.innerText = "Register";
-    submitButton.type = "submit";
+    const submitButton = new Button("Register");
+    submitButton.setAttribute("type", "submit");
     submitButton.appendClasses("mb-2");
 
     const loginAnchor = new Anchor();

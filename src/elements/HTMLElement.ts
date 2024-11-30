@@ -1,4 +1,4 @@
-import Renderable, { RenderableList } from "./Renderable";
+import Renderable, { RenderableList } from "../interface/Renderable";
 
 export type HTTPMethod =
   | "GET"
@@ -12,9 +12,6 @@ export type HTTPMethod =
   | "PATCH";
 
 export default abstract class HTMLElement implements Renderable {
-  // Not used by Component
-  constructor(public params: Record<string, any> = {}) {}
-
   protected _id: string = "";
   public set id(id: string) {
     this._id = id;
