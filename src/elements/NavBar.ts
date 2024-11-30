@@ -1,12 +1,12 @@
-import Component from "./Component";
+import HTMLElement from "./HTMLElement";
 import Button from "./Button";
 import Anchor from "./Anchor";
 import Form from "./Form";
 
-export default class NavBar extends Component {
+export default class NavBar extends HTMLElement {
   public tagName: string = "nav";
 
-  protected preRender(): void {
+  public preRender(): void {
     const logoutButton = new Button();
     logoutButton.bsType = "link";
     logoutButton.innerText = "Logout";

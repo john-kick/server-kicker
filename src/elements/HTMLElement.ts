@@ -1,4 +1,6 @@
-export type HTMLMethod =
+import Renderable, { RenderableList } from "./Renderable";
+
+export type HTTPMethod =
   | "GET"
   | "HEAD"
   | "POST"
@@ -9,9 +11,10 @@ export type HTMLMethod =
   | "TRACE"
   | "PATCH";
 
-export type ComponentList = (Component | string)[];
+export default abstract class HTMLElement implements Renderable {
+  // Not used by Component
+  constructor(public params: Record<string, any> = {}) {}
 
-export default abstract class Component {
   protected _id: string = "";
   public set id(id: string) {
     this._id = id;
@@ -38,9 +41,9 @@ export default abstract class Component {
   public abstract readonly tagName: string;
   protected readonly hasClosingTag = true;
 
-  protected _innerComponents: ComponentList = [];
+  protected _innerComponents: RenderableList = [];
 
-  public appendComponents(...c: ComponentList) {
+  public appendComponents(...c: RenderableList) {
     this._innerComponents = this._innerComponents.concat(c);
   }
 
@@ -66,7 +69,7 @@ export default abstract class Component {
     return this._attributeList[key];
   }
 
-  protected preRender(): void {
+  public preRender(): void {
     //noop
   }
 

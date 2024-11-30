@@ -1,4 +1,4 @@
-import Component from "./Component";
+import HTMLElement from "./HTMLElement";
 
 type BootstrapButtonType =
   | "primary"
@@ -13,7 +13,7 @@ type BootstrapButtonType =
 
 type BootstrapButtonSize = "normal" | "large" | "small";
 
-export default class Button extends Component {
+export default class Button extends HTMLElement {
   public readonly tagName: string = "button";
   private _bsType: BootstrapButtonType = "primary";
   public set bsType(t: BootstrapButtonType) {
@@ -52,7 +52,7 @@ export default class Button extends Component {
     }
   }
 
-  protected preRender(): void {
+  public preRender(): void {
     this._classList.push(
       "btn",
       "btn-" + (this._bsOutline ? "outline-" : "") + this._bsType

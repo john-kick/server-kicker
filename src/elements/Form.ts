@@ -1,9 +1,9 @@
-import Component, { HTMLMethod } from "./Component";
+import HTMLElement, { HTTPMethod } from "./HTMLElement";
 
-export default class Form extends Component {
+export default class Form extends HTMLElement {
   public tagName: string = "form";
 
-  public set method(m: HTMLMethod) {
+  public set method(m: HTTPMethod) {
     this._attributeList["method"] = m;
   }
 

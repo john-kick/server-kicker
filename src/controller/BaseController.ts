@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import NavBar from "../components/NavBar";
+import NavBar from "../elements/NavBar";
 
 export default abstract class BaseController {
   public get(_req: Request, res: Response) {

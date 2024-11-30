@@ -1,4 +1,4 @@
-import Component from "./Component";
+import HTMLElement from "./HTMLElement";
 import Label from "./Label";
 
 type InputType =
@@ -25,7 +25,7 @@ type InputType =
   | "url"
   | "week";
 
-export default class Input extends Component {
+export default class Input extends HTMLElement {
   public readonly tagName: string = "input";
 
   private _type: InputType = "text";
@@ -42,10 +42,7 @@ export default class Input extends Component {
     this._attributeList.name = n;
   }
 
-  private _label: Label | undefined;
-  // public set label(Label)
-
-  protected preRender(): void {
+  public preRender(): void {
     this._attributeList.type = this._type;
     this._attributeList.placeholder = this._placeholder;
   }

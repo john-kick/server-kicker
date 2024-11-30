@@ -1,7 +1,7 @@
-import Component from "./Component";
+import HTMLElement from "./HTMLElement";
 import Input from "./Input";
 
-export default class Label extends Component {
+export default class Label extends HTMLElement {
   public tagName: string = "label";
 
   private _text: string;

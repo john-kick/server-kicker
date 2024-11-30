@@ -1,21 +1,22 @@
-import Component, { ComponentList } from "../components/Component";
-import NavBar from "../components/NavBar";
+import Renderable, { RenderableList } from "../elements/Renderable";
+import NavBar from "../elements/NavBar";
+import config from "../config";
 
-export interface PageParams {}
-
-export default abstract class Page {
+export default abstract class Page implements Renderable {
   protected abstract path: string;
-  protected components: ComponentList = [];
+  protected components: RenderableList = [];
   protected renderNavBar: boolean = true;
 
-  protected abstract build(params?: PageParams): void;
+  constructor(public params: Record<string, any> = {}) {}
 
-  public render(params?: PageParams): string {
-    this.build(params);
+  protected abstract build(): void;
+
+  public render(): string {
+    this.build();
 
     let html = "";
 
-    this.components.forEach((component: Component | string) => {
+    this.components.forEach((component: Renderable | string) => {
       if (typeof component === "string") {
         html += component;
       } else {
@@ -33,7 +34,7 @@ export default abstract class Page {
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-			<link rel="stylesheet" href="http://localhost:3000/styles.css">
+			<link rel="stylesheet" href="http://localhost:${config.APP_PORT}/styles.css">
 				<title>Server Kicker</title>
 			</head>
 			<body data-bs-theme="dark">

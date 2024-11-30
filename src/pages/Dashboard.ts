@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../elements/Header";
 import BasePage from "./BasePage";
 
 export default class Dashboard extends BasePage {

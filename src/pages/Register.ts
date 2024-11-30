@@ -1,22 +1,18 @@
-import Anchor from "../components/Anchor";
-import Button from "../components/Button";
-import Container from "../components/Container";
-import Form from "../components/Form";
-import Header from "../components/Header";
-import Input from "../components/Input";
-import Paragraph from "../components/Paragraph";
-import Span from "../components/Span";
-import BasePage, { PageParams } from "./BasePage";
-
-interface RegisterParams extends PageParams {
-  message?: string;
-}
+import Anchor from "../elements/Anchor";
+import Button from "../elements/Button";
+import Container from "../elements/Container";
+import Form from "../elements/Form";
+import Header from "../elements/Header";
+import Input from "../elements/Input";
+import Paragraph from "../elements/Paragraph";
+import Span from "../elements/Span";
+import BasePage from "./BasePage";
 
 export default class Register extends BasePage {
   protected path: string = "/auth/register";
   protected renderNavBar: boolean = false;
 
-  protected build(params?: RegisterParams): void {
+  protected build(): void {
     const loginHeader = new Header(4);
     loginHeader.appendClasses("mb-3");
     loginHeader.innerText = "Register";
@@ -77,9 +73,9 @@ export default class Register extends BasePage {
       paragraph
     );
 
-    if (params && params.message) {
+    if (this.params && this.params.message) {
       const messageComponent = new Span();
-      messageComponent.innerText = params.message;
+      messageComponent.innerText = this.params.message;
       messageComponent.setStyle("color", "red");
 
       loginForm.appendComponents(messageComponent);

@@ -1,6 +1,6 @@
-import Component from "./Component";
+import HTMLElement from "./HTMLElement";
 
-export default class Anchor extends Component {
+export default class Anchor extends HTMLElement {
   public tagName: string = "a";
 
   public set href(h: string) {

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import config from "../config";
 
 export default async function token(
   req: Request,
@@ -8,15 +9,15 @@ export default async function token(
   const token = req.cookies.token;
 
   if (!token) {
-    return res.redirect("/auth/login");
+    return res.redirect("/auth/login?session_expired=1");
   }
 
-  fetch(`http://localhost:3002/auth/validate?token=${token}`).then(
+  fetch(`${config.AUTH_SERVER_URL}/auth/validate?token=${token}`).then(
     (response) => {
       if (response.ok) {
         next();
       } else {
-        res.status(401).redirect("/auth/login");
+        res.status(401).redirect("/auth/login?session_expired=1");
       }
     }
   );

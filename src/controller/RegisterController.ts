@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import Register from "../pages/Register";
 import BaseController from "./BaseController";
+import config from "../config";
 
 export default class RegisterController extends BaseController {
   public async get(_req: Request, res: Response) {
     try {
-      const registerPage = new Register();
+      const registerPage = new Register({});
       res.send(registerPage.render());
     } catch (error) {
       console.error(error);
@@ -13,19 +14,19 @@ export default class RegisterController extends BaseController {
     }
   }
 
-  public async register(req: Request, res: Response) {
+  public async post(req: Request, res: Response) {
     try {
       const { username, password, passwordRepetition } = req.body;
 
       const msg = this.validate(username, password, passwordRepetition);
 
       if (msg) {
-        const registerPage = new Register();
-        res.send(registerPage.render({ message: msg }));
+        const registerPage = new Register({ message: msg });
+        res.send(registerPage.render());
         return;
       }
 
-      const response = await fetch("http://localhost:3002/auth/register", {
+      const response = await fetch(`${config.AUTH_SERVER_URL}/auth/register`, {
         method: "post",
         headers: {
           "Content-Type": "application/json"
@@ -39,8 +40,8 @@ export default class RegisterController extends BaseController {
       const result = await response.json();
 
       if (!response.ok) {
-        const registerPage = new Register();
-        res.send(registerPage.render({ message: result.message }));
+        const registerPage = new Register({ message: result.message });
+        res.send(registerPage.render());
         return;
       }
 

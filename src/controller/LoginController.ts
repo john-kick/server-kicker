@@ -1,22 +1,28 @@
 import { Request, Response } from "express";
+import config from "../config";
 import Login from "../pages/Login";
 import BaseController from "./BaseController";
 
 export default class AuthController extends BaseController {
-  public get(_req: Request, res: Response) {
+  public get(req: Request, res: Response) {
     try {
-      const loginPage = new Login();
+      const sessionExpired = req.query.session_expired;
+      const loginPage = new Login({
+        message: sessionExpired
+          ? "Your session has expired. Please log in again."
+          : ""
+      });
       res.send(loginPage.render());
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  public async login(req: Request, res: Response) {
+  public async post(req: Request, res: Response) {
     try {
       const { username, password } = req.body;
 
-      const response = await fetch("http://localhost:3002/auth/login", {
+      const response = await fetch(`${config.AUTH_SERVER_URL}/auth/login`, {
         method: "post",
         headers: {
           "Content-Type": "application/json"
@@ -30,8 +36,8 @@ export default class AuthController extends BaseController {
       const result = await response.json();
 
       if (!response.ok) {
-        const loginPage = new Login();
-        res.send(loginPage.render({ message: result.message }));
+        const loginPage = new Login({});
+        res.send(loginPage.render());
         return;
       }
 
