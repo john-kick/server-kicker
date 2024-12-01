@@ -26,7 +26,7 @@ export default class RegisterController extends BaseController {
         return;
       }
 
-      const response = await fetch(`${config.AUTH_SERVER_URL}/auth/register`, {
+      const response = await fetch(`${config.AUTH_SERVER_URL}/register`, {
         method: "post",
         headers: {
           "Content-Type": "application/json"

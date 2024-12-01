@@ -22,7 +22,7 @@ export default class AuthController extends BaseController {
     try {
       const { username, password } = req.body;
 
-      const response = await fetch(`${config.AUTH_SERVER_URL}/auth/login`, {
+      const response = await fetch(`${config.AUTH_SERVER_URL}/login`, {
         method: "post",
         headers: {
           "Content-Type": "application/json"
