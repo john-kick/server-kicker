@@ -16,6 +16,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(loggerMiddleware);
 
+app.get("/alive", (_req, res) => {
+  res.sendStatus(200);
+});
+
 app.use("/", dashboardRouter);
 app.use("/auth", authRouter);
 
