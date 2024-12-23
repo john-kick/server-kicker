@@ -1,6 +1,9 @@
 import Dropdown from "../component/Accordion";
 import Button from "../elements/Button";
+import Container from "../elements/Container";
+import Form from "../elements/Form";
 import Header from "../elements/Header";
+import Input from "../elements/Input";
 import BasePage from "./Page";
 
 export default class Dashboard extends BasePage {
@@ -11,7 +14,15 @@ export default class Dashboard extends BasePage {
 
     this.components.push(title);
 
-    const dropdown = new Dropdown("test-dropdown", [new Button("Test")]);
+    const form = new Form();
+
+    form.appendComponents(new Input(), new Button("Send"));
+
+    const dropdown = new Dropdown("Test", [
+      new Button("Start"),
+      new Button("Stop"),
+      form
+    ]);
     this.components.push(dropdown);
   }
   protected path: string = "/dashboard";
