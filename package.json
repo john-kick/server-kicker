@@ -14,8 +14,9 @@
   "description": "",
   "devDependencies": {
     "@types/cookie-parser": "^1.4.7",
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.0",
-    "@types/express-session": "^1.18.0",
+    "@types/express-session": "^1.18.1",
     "@types/node": "^22.8.5",
     "glob": "^11.0.0",
     "nodemon": "^3.1.7",
@@ -25,11 +26,10 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@types/dotenv": "^8.2.3",
     "@types/uuid": "^10.0.0",
     "@types/winston": "^2.4.4",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "uuid": "^11.0.3",

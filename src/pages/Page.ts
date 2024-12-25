@@ -4,13 +4,15 @@ import Paragraph from "../elements/Paragraph";
 import Renderable, { RenderableList } from "../interface/Renderable";
 import { AlertManager } from "../util/AlertManager";
 
+export interface PageParams {}
+
 export default abstract class Page implements Renderable {
   protected abstract path: string;
   protected components: RenderableList = [];
   protected renderNavBar: boolean = true;
 
   constructor(
-    public params: Record<string, any> = {},
+    protected params: PageParams = {},
     private _alertManager: AlertManager = new AlertManager()
   ) {}
 

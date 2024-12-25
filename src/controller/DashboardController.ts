@@ -4,7 +4,7 @@ import Dashboard from "../pages/Dashboard";
 
 export default class DashboardController extends BaseController {
   public get(req: Request, res: Response) {
-    const dashboardPage = new Dashboard(req.query);
+    const dashboardPage = new Dashboard();
     res.status(200).send(dashboardPage.render());
   }
 }

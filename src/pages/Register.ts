@@ -6,11 +6,19 @@ import Header from "../elements/Header";
 import Input from "../elements/Input";
 import Paragraph from "../elements/Paragraph";
 import Span from "../elements/Span";
-import BasePage from "./Page";
+import BasePage, { PageParams } from "./Page";
+
+interface RegisterParams extends PageParams {
+  registerError?: string;
+}
 
 export default class Register extends BasePage {
   protected path: string = "/auth/register";
   protected renderNavBar: boolean = false;
+
+  constructor(protected params: RegisterParams = {}) {
+    super(params);
+  }
 
   protected build(): void {
     const loginHeader = new Header(4);
@@ -72,9 +80,9 @@ export default class Register extends BasePage {
       paragraph
     );
 
-    if (this.params && this.params.message) {
+    if (this.params && this.params.registerError) {
       const messageComponent = new Span();
-      messageComponent.innerText = this.params.message;
+      messageComponent.innerText = this.params.registerError;
       messageComponent.setStyle("color", "red");
 
       loginForm.appendComponents(messageComponent);

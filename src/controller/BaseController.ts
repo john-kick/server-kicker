@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
+import SessionManager from "../util/SessionManager";
 
 export default abstract class BaseController {
+  protected sessionManager = SessionManager.getInstance();
+
   public get(_req: Request, res: Response) {
     res.sendStatus(405);
   }

@@ -5,18 +5,24 @@ import Form from "../elements/Form";
 import Header from "../elements/Header";
 import Input from "../elements/Input";
 import Paragraph from "../elements/Paragraph";
-import Span from "../elements/Span";
-import BasePage from "./Page";
-import { AlertManager } from "../util/AlertManager";
+import BasePage, { PageParams } from "./Page";
+
+interface LoginParams extends PageParams {
+  loginError?: string;
+}
 
 export default class Login extends BasePage {
   protected path: string = "/auth/login";
   protected renderNavBar: boolean = false;
 
+  constructor(protected params: LoginParams = {}) {
+    super(params);
+  }
+
   protected build(): void {
     // Example: Check if there's an error message in the params and show an alert
-    if (this.params && this.params.error) {
-      this.alertManager.addAlert(this.params.error, "danger", true, 5000); // Show error alert
+    if (this.params && this.params.loginError) {
+      this.alertManager.addAlert(this.params.loginError, "danger", true, 5000); // Show error alert
     }
 
     const loginHeader = new Header(4);

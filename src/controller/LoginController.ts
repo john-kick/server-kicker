@@ -8,7 +8,7 @@ export default class AuthController extends BaseController {
     try {
       const sessionExpired = req.query.session_expired;
       const loginPage = new Login({
-        error: sessionExpired
+        loginError: sessionExpired
           ? "Your session has expired. Please log in again."
           : ""
       });

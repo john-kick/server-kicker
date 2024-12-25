@@ -8,7 +8,8 @@ export default class RunnerController extends BaseController {
       const { scriptName } = req.body;
 
       if (!scriptName) {
-        res.redirect;
+        this.sessionManager.setFlashMessage(req, "error", "No such script");
+        res.sendStatus(404);
         return;
       }
 

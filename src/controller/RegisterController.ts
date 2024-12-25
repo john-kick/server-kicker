@@ -21,7 +21,7 @@ export default class RegisterController extends BaseController {
       const msg = this.validate(username, password, passwordRepetition);
 
       if (msg) {
-        const registerPage = new Register({ message: msg });
+        const registerPage = new Register({ registerError: msg });
         res.send(registerPage.render());
         return;
       }
@@ -40,7 +40,7 @@ export default class RegisterController extends BaseController {
       const result = await response.json();
 
       if (!response.ok) {
-        const registerPage = new Register({ message: result.message });
+        const registerPage = new Register({ registerError: result.message });
         res.send(registerPage.render());
         return;
       }
