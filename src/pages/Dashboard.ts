@@ -12,6 +12,10 @@ export default class Dashboard extends BasePage {
     title.innerText = "Dashboard";
     title.appendClasses("p-2");
 
+    if (this.params.login) {
+      this.alertManager.addAlert("Login successful!", "success");
+    }
+
     this.components.push(title);
 
     const form = new Form();

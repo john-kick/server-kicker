@@ -6,9 +6,9 @@ export class AlertManager {
 
   public addAlert(
     message: string,
-    type: AlertType,
-    dismissible: boolean,
-    duration: number | null
+    type: AlertType = "primary",
+    dismissible: boolean = true,
+    duration: number | null = null
   ) {
     const alert = new Alert(message, type, dismissible, duration);
     this._alerts.push(alert);

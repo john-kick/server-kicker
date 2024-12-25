@@ -51,7 +51,7 @@ export default class AuthController extends BaseController {
         })
       );
 
-      res.redirect("/dashboard");
+      res.redirect("/dashboard?login=1");
     } catch (error) {
       console.error;
       res.status(500).json(error);
