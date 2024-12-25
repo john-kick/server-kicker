@@ -5,7 +5,7 @@ import { join } from "node:path";
 
 export default abstract class ServerRunner {
   public static readonly scriptsDir = "../../scripts";
-  private static activeRunner: ServerRunner | null = null; // Tracks the currently running instance
+  private static activeRunner: ServerRunner | null = null;
 
   private static runnersMap: Map<string, ServerRunner> = new Map();
 

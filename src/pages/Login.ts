@@ -7,12 +7,18 @@ import Input from "../elements/Input";
 import Paragraph from "../elements/Paragraph";
 import Span from "../elements/Span";
 import BasePage from "./Page";
+import { AlertManager } from "../util/AlertManager";
 
 export default class Login extends BasePage {
   protected path: string = "/auth/login";
   protected renderNavBar: boolean = false;
 
   protected build(): void {
+    // Example: Check if there's an error message in the params and show an alert
+    if (this.params && this.params.error) {
+      this.alertManager.addAlert(this.params.error, "danger", true, 5000); // Show error alert
+    }
+
     const loginHeader = new Header(4);
     loginHeader.appendClasses("mb-3");
     loginHeader.innerText = "Login";
@@ -62,14 +68,6 @@ export default class Login extends BasePage {
       submitButton,
       paragraph
     );
-
-    if (this.params && this.params.message) {
-      const messageComponent = new Span();
-      messageComponent.innerText = this.params.message;
-      messageComponent.setStyle("color", "red");
-
-      loginForm.appendComponents(messageComponent);
-    }
 
     const loginContainer = new Container();
     loginContainer.setStyle("position", "absolute");

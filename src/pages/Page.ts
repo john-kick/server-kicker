@@ -1,13 +1,22 @@
-import Renderable, { RenderableList } from "../interface/Renderable";
+import Container from "../elements/Container";
 import NavBar from "../elements/NavBar";
-import config from "../util/config";
+import Paragraph from "../elements/Paragraph";
+import Renderable, { RenderableList } from "../interface/Renderable";
+import { AlertManager } from "../util/AlertManager";
 
 export default abstract class Page implements Renderable {
   protected abstract path: string;
   protected components: RenderableList = [];
   protected renderNavBar: boolean = true;
 
-  constructor(public params: Record<string, any> = {}) {}
+  constructor(
+    public params: Record<string, any> = {},
+    private _alertManager: AlertManager = new AlertManager()
+  ) {}
+
+  public get alertManager(): AlertManager {
+    return this._alertManager;
+  }
 
   protected abstract build(): void;
 
@@ -23,6 +32,13 @@ export default abstract class Page implements Renderable {
         html += component.render();
       }
     });
+
+    html += this.getDevelopmentMessage().render();
+
+    const alertsContainer = new Container();
+    alertsContainer.appendClasses("alerts-container");
+    alertsContainer.appendComponents(this._alertManager.renderAlerts());
+    html += alertsContainer.render();
 
     return this.wrapHTML(html);
   }
@@ -42,14 +58,25 @@ export default abstract class Page implements Renderable {
 			<body data-bs-theme="dark">
 				${this.renderNavBar ? new NavBar().render() : ""}
 				${html}
-				<div style="position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);">
-					<p>
-						The website is still in development. If you find a bug or have feedback: <strong>I DO NOT CARE!</strong>
-					</p>
-					<p>
-						Also: I use cookies. What are you gonna do about it?
-					</p>
-				</div>
 			</body>`;
+  }
+
+  private getDevelopmentMessage(): Container {
+    const devMessage = new Paragraph();
+    devMessage.innerText =
+      "The website is still in development. If you find a bug or have feedback: <strong>I DO NOT CARE!</strong>";
+
+    const cookieMessage = new Paragraph();
+    cookieMessage.innerText =
+      "Also: I use cookies. What are you gonna do about it?";
+
+    const container = new Container();
+    container.appendComponents(devMessage, cookieMessage);
+    container.setStyle("position", "absolute");
+    container.setStyle("bottom", "5px");
+    container.setStyle("left", "50%");
+    container.setStyle("transform", "translateX(-50%)");
+
+    return container;
   }
 }

@@ -26,13 +26,15 @@ export default abstract class HTMLElement implements Renderable {
   public get classList(): string[] {
     return this._classList;
   }
-  public appendClasses(...c: string[]) {
+  public appendClasses(...c: string[]): this {
     this._classList = this._classList.concat(c);
+    return this;
   }
 
   protected _styleList: Record<string, string> = {};
-  public setStyle(k: string, v: string) {
+  public setStyle(k: string, v: string): this {
     this._styleList[k] = v;
+    return this;
   }
 
   public abstract readonly tagName: string;
@@ -40,8 +42,9 @@ export default abstract class HTMLElement implements Renderable {
 
   protected _innerComponents: RenderableList = [];
 
-  public appendComponents(...c: RenderableList) {
+  public appendComponents(...c: RenderableList): this {
     this._innerComponents = this._innerComponents.concat(c);
+    return this;
   }
 
   private _innerText: string = "";
