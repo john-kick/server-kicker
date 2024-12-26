@@ -1,12 +1,13 @@
 import cookieParser from "cookie-parser";
 import express from "express";
+import session from "express-session";
 import path from "node:path";
 import loggerMiddleware from "./middleware/logger.middleware";
 import authRouter from "./routes/auth.routes";
 import dashboardRouter from "./routes/dashboard.routes";
 import runnerRouter from "./routes/runner.routes";
+import testRouter from "./routes/test.routes";
 import config from "./util/config";
-import session from "express-session";
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get("/alive", (_req, res) => {
 app.use("/", dashboardRouter);
 app.use("/auth", authRouter);
 app.use("/runner", runnerRouter);
+app.use("/test", testRouter);
 
 app.listen(config.APP_PORT, () => {
   console.log(`Server listening at http://localhost:${config.APP_PORT}`);

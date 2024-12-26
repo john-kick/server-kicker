@@ -28,7 +28,7 @@ type InputType =
 export default class Input extends HTMLElement {
   public readonly tagName: string = "input";
 
-  private _type: InputType = "text";
+  private _type: InputType;
   public set type(t: InputType) {
     this._type = t;
   }
@@ -40,6 +40,15 @@ export default class Input extends HTMLElement {
 
   public set name(n: string) {
     this._attributeList.name = n;
+  }
+
+  public set value(v: string) {
+    this._attributeList.value = v;
+  }
+
+  constructor(type: InputType = "text") {
+    super();
+    this._type = type;
   }
 
   public preRender(): void {

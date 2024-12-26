@@ -46,6 +46,10 @@ export default abstract class Page implements Renderable {
   }
 
   private wrapHTML(html: string): string {
+    const contentWrapper = new Container();
+    contentWrapper.id = "page-content";
+    contentWrapper.appendClasses("m-3").appendComponents(html);
+
     return `
 		<!DOCTYPE html>
 			<head>
@@ -59,7 +63,7 @@ export default abstract class Page implements Renderable {
 			</head>
 			<body data-bs-theme="dark">
 				${this.renderNavBar ? new NavBar().render() : ""}
-				${html}
+				${contentWrapper.render()}
 			</body>`;
   }
 
