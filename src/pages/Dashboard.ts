@@ -1,3 +1,4 @@
+import { Request } from "express";
 import Dropdown from "../component/Accordion";
 import Button from "../elements/Button";
 import Form from "../elements/Form";
@@ -9,8 +10,8 @@ interface DashboardParams extends PageParams {
 }
 
 export default class Dashboard extends BasePage {
-  constructor(protected params: DashboardParams = {}) {
-    super(params);
+  constructor(req: Request, protected params: DashboardParams = {}) {
+    super(req, params);
   }
 
   protected build(): void {

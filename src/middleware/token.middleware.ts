@@ -9,7 +9,7 @@ export default async function token(
   const token = req.cookies.token;
 
   if (!token) {
-    return res.redirect("/auth/login?session_expired=1");
+    return res.redirect("/auth/login");
   }
 
   fetch(`${config.AUTH_SERVER_URL}/validate?token=${token}`).then(

@@ -1,3 +1,4 @@
+import { Request } from "express";
 import Anchor from "../elements/Anchor";
 import Button from "../elements/Button";
 import Container from "../elements/Container";
@@ -15,8 +16,8 @@ export default class Login extends BasePage {
   protected path: string = "/auth/login";
   protected renderNavBar: boolean = false;
 
-  constructor(protected params: LoginParams = {}) {
-    super(params);
+  constructor(req: Request, protected params: LoginParams = {}) {
+    super(req, params);
   }
 
   protected build(): void {

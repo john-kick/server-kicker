@@ -1,8 +1,10 @@
+import { Request } from "express";
 import Container from "../elements/Container";
 import NavBar from "../elements/NavBar";
 import Paragraph from "../elements/Paragraph";
 import Renderable, { RenderableList } from "../interface/Renderable";
 import { AlertManager } from "../util/AlertManager";
+import SessionManager from "../util/SessionManager";
 
 export interface PageParams {}
 
@@ -12,6 +14,7 @@ export default abstract class Page implements Renderable {
   protected renderNavBar: boolean = true;
 
   constructor(
+    private req: Request,
     protected params: PageParams = {},
     private _alertManager: AlertManager = new AlertManager()
   ) {}
@@ -38,8 +41,26 @@ export default abstract class Page implements Renderable {
     html += this.getDevelopmentMessage().render();
 
     const alertsContainer = new Container();
-    alertsContainer.appendClasses("alerts-container");
+    alertsContainer.appendClasses(
+      "alerts-container",
+      "position-fixed",
+      "bottom-0",
+      "end-0",
+      "mb-3",
+      "me-3"
+    );
     alertsContainer.appendComponents(this._alertManager.renderAlerts());
+
+    // Get all flash messages and display them
+    const sessionManager = SessionManager.getInstance();
+    const flashMessages = sessionManager.getFlashMessages(this.req);
+
+    flashMessages?.forEach((flashMessage) => {
+      this.alertManager.addAlert(flashMessage.message, flashMessage.type);
+    });
+
+    alertsContainer.appendComponents(this.alertManager.renderAlerts());
+
     html += alertsContainer.render();
 
     return this.wrapHTML(html);

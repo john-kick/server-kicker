@@ -1,4 +1,10 @@
 import { Request } from "express";
+import { AlertType } from "../component/Alert";
+
+type FlashMessage = {
+  type: AlertType;
+  message: string;
+};
 
 export default class SessionManager {
   private static instance: SessionManager;
@@ -76,48 +82,28 @@ export default class SessionManager {
   }
 
   /**
-   * Set a temporary flash message.
+   * Add to an array of temporary flash messages.
    * @param req - Express request object
    * @param type - Type of the flash message (e.g., 'success', 'error')
-   * @param message - The message text
+   * @param message - The flash message content
    */
-  public setFlashMessage(req: Request, type: string, message: string): void {
-    this.set(req, "flashMessage", { type, message });
-  }
-
-  /**
-   * Get and delete the flash message.
-   * @param req - Express request object
-   * @returns The flash message object, or undefined if not found
-   */
-  public getFlashMessage(req: Request): string | undefined {
-    const flashMessage = this.get<string>(req, "flashMessage");
-    this.delete(req, "flashMessage");
-    return flashMessage;
-  }
-
-  /**
-   * Add an error message to the session.
-   * @param req - Express request object
-   * @param message - The error message to add
-   */
-  public addError(req: Request, message: string): void {
-    let errors = this.get<string[]>(req, "errors");
-    if (!errors) {
-      errors = [];
+  public addFlashMessage(req: Request, type: AlertType, message: string): void {
+    let flashMessages = this.get<FlashMessage[]>(req, "flashMessages");
+    if (!flashMessages) {
+      flashMessages = [];
     }
-    errors.push(message);
-    this.set(req, "errors", errors);
+    flashMessages.push({ type, message });
+    this.set(req, "flashMessages", flashMessages);
   }
 
   /**
-   * Retrieve and remove all error messages from the session.
+   * Get and delete the flash message array.
    * @param req - Express request object
-   * @returns An array of error messages, or undefined if no errors are found
+   * @returns The flash message array, or undefined if not found
    */
-  public getErrors(req: Request): string[] | undefined {
-    const errors = this.get<string[]>(req, "errors");
-    this.delete(req, "errors");
-    return errors;
+  public getFlashMessages(req: Request): FlashMessage[] | undefined {
+    const flashMessage = this.get<FlashMessage[]>(req, "flashMessages");
+    this.delete(req, "flashMessages");
+    return flashMessage;
   }
 }

@@ -8,7 +8,7 @@ export default class RunnerController extends BaseController {
       const { scriptName } = req.body;
 
       if (!scriptName) {
-        this.sessionManager.setFlashMessage(req, "error", "No such script");
+        this.sessionManager.addFlashMessage(req, "danger", "No such script");
         res.sendStatus(404);
         return;
       }

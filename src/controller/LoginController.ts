@@ -2,12 +2,21 @@ import { Request, Response } from "express";
 import config from "../util/config";
 import Login from "../pages/Login";
 import BaseController from "./BaseController";
+import { jwtDecode } from "jwt-decode";
+
+interface TokenData {
+  username: string;
+  role: "unverified" | "verified" | "admin";
+  id: number;
+  iat: number;
+  exp: number;
+}
 
 export default class AuthController extends BaseController {
   public get(req: Request, res: Response) {
     try {
       const sessionExpired = req.query.session_expired;
-      const loginPage = new Login({
+      const loginPage = new Login(req, {
         loginError: sessionExpired
           ? "Your session has expired. Please log in again."
           : ""
@@ -33,32 +42,33 @@ export default class AuthController extends BaseController {
         })
       });
 
-      const result = await response.json();
+      const { token } = await response.json();
 
       if (!response.ok) {
-        const loginPage = new Login({});
+        const loginPage = new Login(req, {});
         res.send(loginPage.render());
         return;
       }
 
-      res.cookie("token", result.token);
-      res.cookie(
-        "user",
-        JSON.stringify({
-          username: result.username,
-          role: result.role,
-          id: result.id
-        })
-      );
+      const tokenData = jwtDecode(token) as TokenData;
 
-      res.redirect("/dashboard?login=1");
+      res.cookie("token", token);
+
+      this.sessionManager.addFlashMessage(req, "success", "Logged in");
+      this.sessionManager.addFlashMessage(
+        req,
+        "info",
+        `Welcome, ${tokenData.username}!`
+      );
+      res.redirect("/dashboard");
     } catch (error) {
-      console.error;
+      console.error(error);
       res.status(500).json(error);
     }
   }
 
-  public logout(_req: Request, res: Response) {
+  public logout(req: Request, res: Response) {
+    this.sessionManager.clear(req);
     res.clearCookie("token").redirect("/auth/login");
   }
 }

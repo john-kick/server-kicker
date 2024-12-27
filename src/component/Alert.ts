@@ -49,12 +49,7 @@ export default class Alert implements Renderable {
     alertWrapper.appendClasses(
       "alert",
       `alert-${this._type}`,
-      "position-fixed",
-      this._dismissible ? "alert-dismissible" : "",
-      "bottom-0",
-      "end-0",
-      "mb-3",
-      "me-3"
+      this._dismissible ? "alert-dismissible" : ""
     );
     alertWrapper.setAttribute("role", "alert");
 

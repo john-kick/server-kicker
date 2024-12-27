@@ -1,3 +1,4 @@
+import { Request } from "express";
 import Button from "../elements/Button";
 import Form from "../elements/Form";
 import Header from "../elements/Header";
@@ -11,8 +12,8 @@ interface TestParams extends PageParams {
 export default class Test extends Page {
   protected path: string = "/test";
 
-  constructor(protected params: TestParams = {}) {
-    super(params);
+  constructor(req: Request, protected params: TestParams = {}) {
+    super(req, params);
   }
 
   protected build(): void {

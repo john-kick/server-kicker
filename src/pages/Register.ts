@@ -1,3 +1,4 @@
+import { Request } from "express";
 import Anchor from "../elements/Anchor";
 import Button from "../elements/Button";
 import Container from "../elements/Container";
@@ -16,8 +17,8 @@ export default class Register extends BasePage {
   protected path: string = "/auth/register";
   protected renderNavBar: boolean = false;
 
-  constructor(protected params: RegisterParams = {}) {
-    super(params);
+  constructor(req: Request, protected params: RegisterParams = {}) {
+    super(req, params);
   }
 
   protected build(): void {

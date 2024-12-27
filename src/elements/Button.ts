@@ -46,7 +46,7 @@ export default class Button extends HTMLElement {
   }
 
   private mapSizeToClassName(): string {
-    switch (this.size) {
+    switch (this._size) {
       case "large":
         return "btn-lg";
       case "normal":

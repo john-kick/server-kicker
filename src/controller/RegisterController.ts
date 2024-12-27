@@ -4,9 +4,9 @@ import BaseController from "./BaseController";
 import config from "../util/config";
 
 export default class RegisterController extends BaseController {
-  public async get(_req: Request, res: Response) {
+  public async get(req: Request, res: Response) {
     try {
-      const registerPage = new Register({});
+      const registerPage = new Register(req, {});
       res.send(registerPage.render());
     } catch (error) {
       console.error(error);
@@ -21,7 +21,7 @@ export default class RegisterController extends BaseController {
       const msg = this.validate(username, password, passwordRepetition);
 
       if (msg) {
-        const registerPage = new Register({ registerError: msg });
+        const registerPage = new Register(req, { registerError: msg });
         res.send(registerPage.render());
         return;
       }
@@ -40,7 +40,9 @@ export default class RegisterController extends BaseController {
       const result = await response.json();
 
       if (!response.ok) {
-        const registerPage = new Register({ registerError: result.message });
+        const registerPage = new Register(req, {
+          registerError: result.message
+        });
         res.send(registerPage.render());
         return;
       }
