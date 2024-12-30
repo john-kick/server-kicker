@@ -1,7 +1,6 @@
 import HTMLElement from "./HTMLElement";
-import Label from "./Label";
 
-type InputType =
+export type InputType =
   | "button"
   | "checkbox"
   | "color"

@@ -1,10 +1,13 @@
 import { ChildProcess, spawn } from "node:child_process";
 import { EventEmitter } from "node:events";
-import { createWriteStream } from "node:fs";
+import { createWriteStream, mkdirSync } from "node:fs";
 import { join } from "node:path";
 
+export type RunnerStatus = "starting" | "running" | "stopping" | "inactive";
+
 export default abstract class ServerRunner {
-  public static readonly scriptsDir = "../../scripts";
+  public static readonly scriptsDir = "scripts";
+  public static readonly logsDir = "logs/server";
   private static activeRunner: ServerRunner | null = null;
 
   private static runnersMap: Map<string, ServerRunner> = new Map();
@@ -12,6 +15,8 @@ export default abstract class ServerRunner {
   protected process: ChildProcess | undefined;
   protected abstract scriptName: string;
   protected eventEmitter = new EventEmitter();
+
+  constructor(private status: RunnerStatus = "inactive") {}
 
   public static get currentRunner(): ServerRunner | null {
     return ServerRunner.activeRunner;
@@ -25,6 +30,14 @@ export default abstract class ServerRunner {
   // Method to get a runner class by name
   public static getRunner(name: string): ServerRunner | undefined {
     return this.runnersMap.get(name);
+  }
+
+  public static getStatus(): RunnerStatus | undefined {
+    return ServerRunner.activeRunner?.status;
+  }
+
+  private static getTimestamp(): string {
+    return new Date().toISOString(); // Use ISO format for timestamps
   }
 
   public start(): void {
@@ -41,9 +54,9 @@ export default abstract class ServerRunner {
       throw new Error("Script path is not defined.");
     }
 
-    const logDir = "../../logs/server";
+    mkdirSync(ServerRunner.logsDir, { recursive: true });
     const logFilePath = join(
-      logDir,
+      ServerRunner.logsDir,
       `${this.scriptName.replace(/[^a-zA-Z0-9]/g, "_")}.log`
     );
     const logStream = createWriteStream(logFilePath, { flags: "a" });
@@ -57,42 +70,49 @@ export default abstract class ServerRunner {
     );
 
     if (!this.process) {
-      ServerRunner.activeRunner = null; // Reset active runner on failure
+      ServerRunner.activeRunner = null;
       throw new Error("Failed to spawn process.");
     }
 
     this.process.stdout?.on("data", (data) => {
       const output = data.toString().trim();
-      logStream.write(output + "\n");
+      const timestampedOutput = `[${ServerRunner.getTimestamp()}] ${output}`;
+      logStream.write(timestampedOutput + "\n");
       this.detectBaseEvents(output);
       this.detectCustomEvents(output);
     });
 
     this.process.stderr?.on("data", (data) => {
-      logStream.write(data.toString());
+      const timestampedError = `[${ServerRunner.getTimestamp()}] ${data.toString()}`;
+      logStream.write(timestampedError);
     });
 
     this.process.on("close", (code) => {
-      this.emit("stopped", `[INFO] Server stopped with code ${code}`);
-      logStream.write(`\n[INFO] Process exited with code ${code}\n`);
+      const closeMessage = `[${ServerRunner.getTimestamp()}] [INFO] Process exited with code ${code}`;
+      this.emit("stopped", closeMessage);
+      logStream.write(`\n${closeMessage}\n`);
       logStream.end();
-      ServerRunner.activeRunner = null; // Release lock
+      ServerRunner.activeRunner = null;
     });
 
     this.process.on("error", (err) => {
-      logStream.write(`\n[ERROR] Process error: ${err.message}\n`);
+      const errorMessage = `[${ServerRunner.getTimestamp()}] [ERROR] Process error: ${
+        err.message
+      }`;
+      logStream.write(`\n${errorMessage}\n`);
       logStream.end();
-      ServerRunner.activeRunner = null; // Release lock
+      ServerRunner.activeRunner = null;
     });
 
-    this.emit("started", "[INFO] Server has started.");
+    this.emit("starting", "[INFO] Server has started.");
   }
 
   public stop(): void {
     if (this.process) {
-      this.emit("stopping", "[INFO] Server is stopping...");
+      const stopMessage = `[${ServerRunner.getTimestamp()}] [INFO] Server is stopping...`;
+      this.emit("stopping", stopMessage);
       this.process.kill();
-      ServerRunner.activeRunner = null; // Release lock when stopped
+      ServerRunner.activeRunner = null;
     }
   }
 
@@ -109,7 +129,8 @@ export default abstract class ServerRunner {
   }
 
   protected emit(eventType: string, output: string): void {
-    this.eventEmitter.emit(eventType, output);
+    const timestampedOutput = `[${ServerRunner.getTimestamp()}] ${output}`;
+    this.eventEmitter.emit(eventType, timestampedOutput);
   }
 
   private detectBaseEvents(output: string): void {

@@ -99,10 +99,22 @@ export default abstract class Page implements Renderable {
 
     const container = new Container();
     container.appendComponents(devMessage, cookieMessage);
-    container.setStyle("position", "absolute");
-    container.setStyle("bottom", "5px");
-    container.setStyle("left", "50%");
-    container.setStyle("transform", "translateX(-50%)");
+
+    // Apply styles for the development message
+    container
+      .setStyle("position", "fixed") // Fix to the bottom of the screen
+      .setStyle("bottom", "0")
+      .setStyle("left", "50%")
+      .setStyle("transform", "translateX(-50%)") // Center horizontally
+      .setStyle("background", "rgba(0, 0, 0, 0.5)") // Semi-transparent background
+      .setStyle("border", "2px solid white") // White border
+      .setStyle("border-radius", "10px") // Rounded corners
+      .setStyle("padding", "10px 20px") // Padding
+      .setStyle("backdrop-filter", "blur(10px)") // Blurry background
+      .setStyle("color", "white") // White text color
+      .setStyle("font-size", "14px") // Font size
+      .setStyle("text-align", "center") // Center text
+      .setStyle("z-index", "9999"); // Ensure it stays on top of other content
 
     return container;
   }

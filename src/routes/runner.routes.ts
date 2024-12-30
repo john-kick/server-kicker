@@ -7,6 +7,5 @@ const runnerController = new RunnerController();
 
 router.post("/start", (req, res) => runnerController.start(req, res));
 router.post("/stop", (req, res) => runnerController.stop(req, res));
-router.post("/input", (req, res) => runnerController.input(req, res));
 
 export default router;

@@ -8,6 +8,9 @@ import dashboardRouter from "./routes/dashboard.routes";
 import runnerRouter from "./routes/runner.routes";
 import testRouter from "./routes/test.routes";
 import config from "./util/config";
+import ServerRunner from "./runner/ServerRunner";
+import TestRunner from "./runner/TestRunner";
+import gamesRouter from "./routes/games.routes";
 
 const app = express();
 
@@ -42,6 +45,10 @@ app.use("/", dashboardRouter);
 app.use("/auth", authRouter);
 app.use("/runner", runnerRouter);
 app.use("/test", testRouter);
+app.use("/games", gamesRouter);
+
+// Register all runners
+ServerRunner.registerRunner("test", new TestRunner());
 
 app.listen(config.APP_PORT, () => {
   console.log(`Server listening at http://localhost:${config.APP_PORT}`);
