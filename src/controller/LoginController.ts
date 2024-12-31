@@ -32,29 +32,35 @@ export default class AuthController extends BaseController {
       const { username, password } = req.body;
 
       const response = await fetch(`${config.AUTH_SERVER_URL}/login`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
       });
 
-      const { token } = await response.json();
-
       if (!response.ok) {
-        const loginPage = new Login(req, {});
-        res.send(loginPage.render());
+        const loginPage = new Login(req, {
+          loginError: "Invalid credentials."
+        });
+        res.status(401).send(loginPage.render());
         return;
       }
 
-      const tokenData = jwtDecode(token) as TokenData;
+      const { token } = await response.json();
+      let tokenData: TokenData;
+      try {
+        tokenData = jwtDecode(token) as TokenData;
+      } catch (error) {
+        console.error("Invalid token:", error);
+        res.status(401).send("Invalid token received.");
+        return;
+      }
 
       res.cookie("token", token);
-
-      this.sessionManager.addFlashMessage(req, "success", "Logged in");
+      this.sessionManager.addFlashMessage(
+        req,
+        "success",
+        "Logged in successfully."
+      );
       this.sessionManager.addFlashMessage(
         req,
         "info",
@@ -62,13 +68,15 @@ export default class AuthController extends BaseController {
       );
       res.redirect("/dashboard");
     } catch (error) {
-      console.error(error);
-      res.status(500).json(error);
+      console.error("Login error:", error);
+      res
+        .status(500)
+        .send("An error occurred during login. Please try again later.");
     }
   }
 
   public logout(req: Request, res: Response) {
     this.sessionManager.clear(req);
-    res.clearCookie("token").redirect("/auth/login");
+    res.clearCookie("token").redirect("/auth/login?logout=1");
   }
 }

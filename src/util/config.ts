@@ -10,6 +10,7 @@ interface Config {
   LOG_LEVEL: string;
   AUTH_SERVER_URL: string;
   SESSION_KEY: string;
+  SERVER_LOCATION: string;
 }
 
 /**
@@ -30,7 +31,8 @@ const config: Config = {
   APP_PORT: +getConfigValue("APP_PORT"),
   LOG_LEVEL: getConfigValue("LOG_LEVEL"),
   AUTH_SERVER_URL: getConfigValue("AUTH_SERVER_URL"),
-  SESSION_KEY: getConfigValue("SESSION_KEY")
+  SESSION_KEY: getConfigValue("SESSION_KEY"),
+  SERVER_LOCATION: getConfigValue("SERVER_LOCATION")
 };
 
 export default config;

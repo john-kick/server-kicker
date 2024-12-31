@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
 import BaseController from "./BaseController";
-import ServerRunner from "../runner/ServerRunner"; // Adjust import path as needed
+import Runner from "../runner/Runner"; // Adjust import path as needed
 import { AlertType } from "../component/Alert";
 
 export default class RunnerController extends BaseController {
   public start(req: Request, res: Response): void {
     try {
-      const { scriptName } = req.body;
+      const { name, id } = req.body;
 
-      if (!scriptName) {
-        this.redirectWithMessage(req, res, "A script name must be provided.");
+      if (!name) {
+        this.redirectWithMessage(req, res, "A name must be provided.");
         return;
       }
 
-      if (ServerRunner.currentRunner) {
+      if (Runner.currentRunner) {
         this.redirectWithMessage(
           req,
           res,
@@ -23,18 +23,18 @@ export default class RunnerController extends BaseController {
         return;
       }
 
-      const runner = ServerRunner.getRunner(scriptName);
+      const runner = Runner.getRunner(name);
       if (!runner) {
         this.redirectWithMessage(req, res, "No such runner");
         return;
       }
 
-      runner.start();
+      // runner.start(name);
 
       this.redirectWithMessage(
         req,
         res,
-        `Runner started with script: ${scriptName}`,
+        `Runner started with script: ${name}`,
         "success"
       );
     } catch (error) {
@@ -49,7 +49,7 @@ export default class RunnerController extends BaseController {
 
   public stop(req: Request, res: Response): void {
     try {
-      const runner = ServerRunner.currentRunner;
+      const runner = Runner.currentRunner;
 
       if (!runner) {
         this.redirectWithMessage(req, res, "No active runner to stop.", "info");

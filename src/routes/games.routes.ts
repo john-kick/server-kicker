@@ -1,9 +1,14 @@
 import { Router } from "express";
-import minecraftRouter from "./games/minecraft.routes";
 import token from "../middleware/token.middleware";
 
 const router = Router();
 
-router.use("/minecraft", token, minecraftRouter);
+const gameRoutes = {
+  minecraft: "./games/minecraft.routes"
+};
+
+Object.entries(gameRoutes).forEach(([game, routePath]) => {
+  router.use(`/${game}`, token, require(routePath).default);
+});
 
 export default router;
