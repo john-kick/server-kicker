@@ -67,14 +67,14 @@ export default class Dashboard extends BasePage {
     );
 
     // Example card setup (you can add more cards dynamically as needed)
-    const card = new Card(
+    const minecraftCard = new Card(
       "Minecraft",
       [],
       undefined,
       "/images/Minecraft.png",
       "/games/minecraft"
     );
-    cardContainer.appendComponents(card, card, card, card, card);
+    cardContainer.appendComponents(minecraftCard);
 
     // Push the card container to the components list
     this.components.push(cardContainer);

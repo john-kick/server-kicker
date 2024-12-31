@@ -28,8 +28,16 @@ export default class MinecraftController extends BaseController {
     }
   }
 
+  create(req: Request, res: Response) {
+    this.addFlashMessage(
+      req,
+      "danger",
+      "Creating new servers is not supported yet"
+    );
+    res.redirect("/games/minecraft");
+  }
+
   updateMinecraftVersionData(req: Request, res: Response) {
-    throw new Error("Test");
     if (this.updateInProgress) {
       this.addFlashMessage(
         req,

@@ -12,7 +12,7 @@ export default abstract class Runner {
   private static runnersMap: Map<string, Runner> = new Map();
 
   protected process: ChildProcess | undefined;
-  protected abstract scriptName: string;
+  protected abstract name: string;
   protected eventEmitter = new EventEmitter();
   private monitorInterval: NodeJS.Timeout | null = null;
   private startTimeout: NodeJS.Timeout | null = null;
@@ -44,42 +44,42 @@ export default abstract class Runner {
     return new Date().toISOString();
   }
 
-  public start(server: string, id: string, timeoutMs: number = 5000): void {
+  public start(id: string, timeoutMs: number = 5000): void {
     if (Runner.activeRunner) {
       throw new Error(
-        `Another server runner is already active: ${Runner.activeRunner.scriptName}`
+        `Another server runner is already active: ${Runner.activeRunner.name}`
       );
     }
 
     Runner.activeRunner = this;
-    this.status = "starting";
-    this.emit("starting", `[INFO] Server (${this.scriptName}) is starting...`);
-
-    if (!this.scriptName) {
-      throw new Error(`[${this.scriptName}] Script path is not defined.`);
-    }
 
     mkdirSync(Runner.logsDir, { recursive: true });
     const logFilePath = join(
       Runner.logsDir,
-      `${this.scriptName.replace(/[^a-zA-Z0-9]/g, "_")}.log`
+      `${this.name.replace(/[^a-zA-Z0-9]/g, "_")}-${id.replace(
+        /[^a-zA-Z0-9]/g,
+        "_"
+      )}.log`
     );
     const logStream = createWriteStream(logFilePath, { flags: "a" });
 
-    this.process = spawn("bash", [this.getRunnable(server, id)], {
+    this.process = spawn("bash", [this.getRunnable(id)], {
       stdio: ["pipe", "pipe", "pipe"]
     });
 
     if (!this.process) {
       Runner.activeRunner = null;
-      throw new Error(`[${this.scriptName}] Failed to spawn process.`);
+      throw new Error(`[${this.name}] Failed to spawn process.`);
     }
+
+    this.status = "starting";
+    this.emit("starting", `[INFO] Server (${this.name}) is starting...`);
 
     this.startTimeout = setTimeout(() => {
       if (this.status !== "running") {
         this.stop();
         throw new Error(
-          `[${this.scriptName}] Runner failed to start within timeout (${timeoutMs}ms).`
+          `[${this.name}] Runner failed to start within timeout (${timeoutMs}ms).`
         );
       }
     }, timeoutMs);
@@ -123,13 +123,13 @@ export default abstract class Runner {
 
     if (this.process) {
       const stopMessage = `[${Runner.getTimestamp()}] [INFO] Server (${
-        this.scriptName
+        this.name
       }) is stopping...`;
       this.emit("stopping", stopMessage);
       this.process.kill();
       this.cleanup();
     } else {
-      throw new Error(`[${this.scriptName}] No running process to stop.`);
+      throw new Error(`[${this.name}] No running process to stop.`);
     }
   }
 
@@ -146,7 +146,7 @@ export default abstract class Runner {
     if (this.process?.stdin) {
       this.process.stdin.write(str + "\n");
     } else {
-      throw new Error(`[${this.scriptName}] Process is not running.`);
+      throw new Error(`[${this.name}] Process is not running.`);
     }
   }
 
@@ -179,17 +179,19 @@ export default abstract class Runner {
       if (this.process?.pid) {
         const usage = process.memoryUsage(); // Replace with a library like `pidusage` for accurate stats
         console.log(
-          `[${this.scriptName}] Memory Usage: ${(
-            usage.rss /
-            1024 /
-            1024
-          ).toFixed(2)} MB`
+          `[${this.name}] Memory Usage: ${(usage.rss / 1024 / 1024).toFixed(
+            2
+          )} MB`
         );
       }
     }, 5000);
   }
 
-  protected getRunnable(server: string, id: string): string {
-    return path.join(config.SERVER_LOCATION, server, id, "start.sh");
+  protected getRunnable(id: string): string {
+    return path.join(config.SERVER_LOCATION, this.name, id, "start.sh");
+  }
+
+  protected validateInstallation(id: string): void {
+    // Nothing to do
   }
 }

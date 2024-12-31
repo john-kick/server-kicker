@@ -13,6 +13,10 @@ export default class RunnerController extends BaseController {
         return;
       }
 
+      if (!id) {
+        this.redirectWithMessage(req, res, "An id must be provided.");
+      }
+
       if (Runner.currentRunner) {
         this.redirectWithMessage(
           req,
@@ -29,7 +33,7 @@ export default class RunnerController extends BaseController {
         return;
       }
 
-      // runner.start(name);
+      runner.start(id);
 
       this.redirectWithMessage(
         req,
