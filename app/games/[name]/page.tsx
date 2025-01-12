@@ -1,7 +1,7 @@
 "use client";
 
 import GameCard from "@/app/components/GameCard";
-import { games } from "@/app/data/games";
+import { games } from "@/data/games";
 import { StaticImageData } from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

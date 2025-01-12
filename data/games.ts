@@ -1,6 +1,6 @@
 import { StaticImageData } from "next/image";
-import MinecraftImage from "@/app/images/Minecraft.png";
-import SatisfactoryImage from "@/app/images/Satisfactory.png";
+import MinecraftImage from "@/images/Minecraft.png";
+import SatisfactoryImage from "@/images/Satisfactory.png";
 
 export type GameData = {
   name: string;

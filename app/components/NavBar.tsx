@@ -14,13 +14,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import logo from "@/app/images/logo192.png";
+import logo from "@/images/logo192.png";
+import { games } from "@/data/games";
 
 export default function NavBar(): React.JSX.Element {
   const [anchorElGames, setAnchorElGames] = useState<null | HTMLElement>(null);
 
   const pages = ["dashboard", "showcase"];
-  const games = ["minecraft", "satisfactory"];
 
   const handleOpenGameMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElGames(event.currentTarget);
@@ -88,11 +88,9 @@ export default function NavBar(): React.JSX.Element {
             anchorEl={anchorElGames}
             onClose={handleCloseGameMenu}
           >
-            {games.map((game) => (
-              <MenuItem key={game} onClick={() => handleChooseGame(game)}>
-                <Typography className="text-center">
-                  {game.toUpperCase()}
-                </Typography>
+            {games.map(({ name, title }) => (
+              <MenuItem key={name} onClick={() => handleChooseGame(name)}>
+                <Typography className="text-center">{title}</Typography>
               </MenuItem>
             ))}
           </Menu>

@@ -2,7 +2,7 @@
 
 import GameCard from "../components/GameCard";
 import { useRouter } from "next/navigation";
-import { games } from "../data/games";
+import { games } from "../../data/games";
 
 export default function Page(): React.JSX.Element {
   const router = useRouter();
