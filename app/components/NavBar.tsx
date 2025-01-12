@@ -14,7 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import logo from "../../public/images/logo192.png";
+import logo from "@/app/images/logo192.png";
 
 export default function NavBar(): React.JSX.Element {
   const [anchorElGames, setAnchorElGames] = useState<null | HTMLElement>(null);

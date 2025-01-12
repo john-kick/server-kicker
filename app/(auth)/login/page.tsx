@@ -1,7 +1,5 @@
 "use client";
 
-import React, { FormEvent, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   Alert,
   Button,
@@ -12,6 +10,8 @@ import {
   Typography
 } from "@mui/material";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import React, { FormEvent, useState } from "react";
 
 export default function Page(): React.JSX.Element {
   const authServerUrl = process.env.NEXT_PUBLIC_AUTH_SERVER_URL;
@@ -24,14 +24,6 @@ export default function Page(): React.JSX.Element {
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    // Check if the token exists in cookies
-    const token = Cookies.get("token");
-    if (token) {
-      router.push("/dashboard");
-    }
-  }, [router]);
 
   const handleLogin = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
