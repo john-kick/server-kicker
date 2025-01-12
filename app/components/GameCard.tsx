@@ -14,17 +14,21 @@ export default function GameCard(props: CardProps): React.JSX.Element {
     <Box
       className={props.className}
       sx={{
-        display: "inline-block",
-        cursor: "pointer",
-        transition: "all 0.3s ease-in-out", // Smooth transition for the effect
-        "&:hover": {
-          boxShadow: 3, // Adds shadow when the card is hovered
-          transform: "scale(1.05)" // Slight zoom effect
-        }
+        display: "inline-block"
       }}
       onClick={props.onClick}
     >
-      <Card sx={{ maxWidth: 345 }}>
+      <Card
+        sx={{
+          transition: "all 0.3s ease-in-out",
+          maxWidth: 320,
+          cursor: "pointer",
+          "&:hover": {
+            boxShadow: 3,
+            transform: "scale(1.05)"
+          }
+        }}
+      >
         {/* Image part */}
         <CardMedia
           component="img"

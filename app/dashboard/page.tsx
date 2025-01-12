@@ -1,6 +1,6 @@
 "use client";
 
-import GameCard from "../components/Card";
+import GameCard from "../components/GameCard";
 import minecraft from "../../public/images/Minecraft.png";
 import satisfactory from "../../public/images/Satisfactory.png";
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ export default function Page(): React.JSX.Element {
     <div>
       {games.map(({ name, image }) => (
         <GameCard
-          className="p-3"
+          className="pe-3"
           key={name}
           img={image}
           title={name.toUpperCase()}

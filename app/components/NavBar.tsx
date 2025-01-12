@@ -4,42 +4,35 @@ import {
   AppBar,
   Box,
   Button,
-  ButtonGroup,
   IconButton,
   Menu,
   MenuItem,
   Toolbar,
   Typography
 } from "@mui/material";
-import Cookies from "js-cookie";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
-import logo from "../../public/images/logo192.png";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useState } from "react";
+import logo from "../../public/images/logo192.png";
 
 export default function NavBar(): React.JSX.Element {
-  const router = useRouter();
-  const pathname = usePathname(); // Get the current URL path
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // State to handle dropdown
+  const [anchorElGames, setAnchorElGames] = useState<null | HTMLElement>(null);
 
-  const games = ["minecraft"];
+  const pages = ["dashboard", "showcase"];
+  const games = ["minecraft", "satisfactory"];
 
-  const handleLogout = () => {
-    // Remove token from cookies
-    Cookies.remove("token");
-    // Redirect to the login page
-    router.push("/login");
+  const handleOpenGameMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElGames(event.currentTarget);
   };
 
-  // Handle dropdown open
-  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleCloseGameMenu = () => {
+    setAnchorElGames(null);
   };
 
-  // Handle dropdown close
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleChooseGame = (game: string) => {
+    setAnchorElGames(null);
+    redirect(`/games/${game}`);
   };
 
   return (
@@ -51,7 +44,7 @@ export default function NavBar(): React.JSX.Element {
           alignItems: "center"
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box className="flex align-middle me-3">
           <Link href="/dashboard">
             <Box
               sx={{
@@ -74,54 +67,39 @@ export default function NavBar(): React.JSX.Element {
           </Link>
         </Box>
 
-        {/* Button Group for Dashboard and Showcase */}
-        <ButtonGroup
-          variant="outlined"
-          aria-label="navigation buttons"
-          sx={{ display: "flex", gap: 0 }}
-        >
+        <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          {pages.map((page) => (
+            <Button
+              key={page}
+              sx={{ my: 2, color: "white", display: "block" }}
+              href={`/${page}`}
+            >
+              {page}
+            </Button>
+          ))}
           <Button
-            variant={pathname === "/dashboard" ? "contained" : "outlined"}
+            onClick={handleOpenGameMenu}
+            sx={{ my: 2, color: "white", display: "block" }}
           >
-            <Link href="/dashboard" passHref>
-              Dashboard
-            </Link>
+            Games
           </Button>
-          <Button variant={pathname === "/showcase" ? "contained" : "outlined"}>
-            <Link href="/showcase" passHref>
-              Showcase
-            </Link>
-          </Button>
-        </ButtonGroup>
-
-        {/* "Games" Dropdown */}
-        <Box sx={{ position: "relative" }}>
-          <IconButton
-            color="inherit"
-            onClick={handleMenuClick}
-            sx={{ display: "flex", alignItems: "center" }}
-          >
-            <Typography variant="button" sx={{ color: "white" }}>
-              Games
-            </Typography>
-          </IconButton>
-
-          {/* Dropdown Menu */}
           <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
+            open={Boolean(anchorElGames)}
+            anchorEl={anchorElGames}
+            onClose={handleCloseGameMenu}
           >
-            {games.map((game, index) => (
-              <MenuItem key={`game-${index}`} onClick={handleMenuClose}>
-                <Link href={`/games/${game}`}>{game.toLocaleUpperCase()}</Link>
+            {games.map((game) => (
+              <MenuItem key={game} onClick={() => handleChooseGame(game)}>
+                <Typography className="text-center">
+                  {game.toUpperCase()}
+                </Typography>
               </MenuItem>
             ))}
           </Menu>
         </Box>
 
         {/* Logout Button */}
-        <IconButton color="inherit" onClick={handleLogout}>
+        <IconButton color="inherit" href="/logout">
           <Typography variant="button" sx={{ color: "white" }}>
             Logout
           </Typography>

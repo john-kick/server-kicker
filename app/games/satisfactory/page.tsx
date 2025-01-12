@@ -1,6 +1,6 @@
 "use client";
 
-import GameCard from "@/app/components/Card";
+import GameCard from "@/app/components/GameCard";
 import React from "react";
 import minecraft from "../../../public/images/Satisfactory.png";
 import { useRouter } from "next/navigation";

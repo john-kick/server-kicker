@@ -1,54 +1,79 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function middleware(req: NextRequest) {
-  const excludedPaths = ["/dashboard", "/showcase"];
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)"
+  ]
+};
 
-  if (!excludedPaths.some((path) => req.url.includes(path))) {
-    return NextResponse.next();
+export async function middleware(
+  request: NextRequest
+): Promise<NextResponse<unknown>> {
+  if (request.nextUrl.pathname === "/logout") {
+    return logout(request);
   }
 
-  const token = req.cookies.get("token")?.value;
+  const skipTokenValidation = ["/login", "/register"];
+
+  const response = NextResponse.next();
+
+  if (skipTokenValidation.includes(request.nextUrl.pathname)) {
+    return response;
+  }
+
+  const token = request.cookies.get("token");
 
   if (!token) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const validateEndpoint =
-    process.env.NEXT_PUBLIC_AUTH_SERVER_URL + "/validate";
+  const newToken = await checkTokenValid(token.value);
 
-  try {
-    const response = await fetch(validateEndpoint, {
-      method: "GET",
+  if (!newToken) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  response.cookies.set({ name: "token", value: newToken, path: "/" });
+
+  return NextResponse.next();
+}
+
+async function checkTokenValid(token: string): Promise<string | false> {
+  if (!process.env.NEXT_PUBLIC_AUTH_SERVER_URL) {
+    throw new Error("NEXT_PUBLIC_AUTH_SERVER_URL must be set in .env");
+  }
+
+  const response = await fetch(
+    process.env.NEXT_PUBLIC_AUTH_SERVER_URL + "/validate",
+    {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.log(errorData);
-
-      return NextResponse.redirect(new URL("/login", req.url));
     }
+  );
 
-    const result = await response.json();
-
-    if (result.token) {
-      const res = NextResponse.next();
-
-      res.cookies.set("token", result.token, {
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        path: "/"
-      });
-
-      return res;
-    }
-
-    return NextResponse.next();
-  } catch (error) {
-    console.error("Token validation failed:", error);
-    return NextResponse.redirect(new URL("/login", req.url));
+  if (!response.ok) {
+    return false;
   }
+
+  const result = await response.json();
+  return result.token;
+}
+
+function logout(request: NextRequest): NextResponse {
+  const redirect = NextResponse.redirect(new URL("/login", request.url));
+  redirect.cookies.delete("token");
+  return redirect;
 }
