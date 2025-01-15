@@ -1,0 +1,79 @@
+@import url("./variables.css");
+@import url("./(auth)/auth.css");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  transition: all ease-in-out 0.1s;
+  color: white;
+  font-size: 1rem;
+  font-family: "Roboto", serif;
+  font-weight: 400;
+}
+
+body {
+  background: var(--background-color);
+}
+
+input {
+  padding: 8 16 8 16;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: dimgrey;
+}
+
+input.invalid {
+  border: 2px solid darkred;
+}
+
+button {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px 8px 12px;
+  cursor: pointer;
+}
+
+.paper {
+  background-color: var(--paper);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.primary {
+  background-color: var(--primary-color);
+}
+
+.secondary {
+  background-color: var(--secondary-color);
+}
+
+.tertiary {
+  background-color: var(--tertiary-color);
+}
+
+.loader {
+  width: 1rem;
+  height: 1rem;
+  border: 3px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error-box {
+  background-color: var(--error-background) !important;
+  border-radius: 8px !important;
+}
