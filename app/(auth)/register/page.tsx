@@ -190,17 +190,12 @@ export default function Page(): React.JSX.Element {
   ];
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div>
       <Paper elevation={1}>
-        <form
-          onSubmit={handleRegister}
-          className="w-full max-w-md p-6 space-y-6"
-        >
-          <Typography variant="h5" className="text-center font-semibold">
-            Register
-          </Typography>
+        <form onSubmit={handleRegister}>
+          <Typography variant="h5">Register</Typography>
 
-          <div className="space-y-4">
+          <div>
             <TextField
               id="username"
               name="username"
@@ -242,7 +237,6 @@ export default function Page(): React.JSX.Element {
             variant="contained"
             fullWidth
             disabled={isLoading}
-            className="h-12"
           >
             {isLoading ? (
               <CircularProgress size={24} color="inherit" />
@@ -251,7 +245,7 @@ export default function Page(): React.JSX.Element {
             )}
           </Button>
 
-          <Typography variant="body2" className="text-center">
+          <Typography variant="body2">
             Already have an account?{" "}
             <Link href="/login" underline="hover">
               Login here
@@ -259,8 +253,8 @@ export default function Page(): React.JSX.Element {
           </Typography>
         </form>
       </Paper>
-      <Paper elevation={1} className="ms-4">
-        <div className="w-full max-w-md p-6 space-y-6">
+      <Paper elevation={1}>
+        <div>
           {validationMessages.map((validation, index) => (
             <Alert
               key={index}

@@ -66,14 +66,12 @@ export default function Page(): React.JSX.Element {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div>
       <Paper elevation={1}>
-        <form onSubmit={handleLogin} className="w-full max-w-md p-6 space-y-6">
-          <Typography variant="h5" className="text-center font-semibold">
-            Login
-          </Typography>
+        <form onSubmit={handleLogin}>
+          <Typography variant="h5">Login</Typography>
 
-          <div className="space-y-4">
+          <div>
             <TextField
               id="username"
               name="username"
@@ -100,7 +98,6 @@ export default function Page(): React.JSX.Element {
             variant="contained"
             fullWidth
             disabled={isLoading}
-            className="h-12"
           >
             {isLoading ? (
               <CircularProgress size={24} color="inherit" />
@@ -109,7 +106,7 @@ export default function Page(): React.JSX.Element {
             )}
           </Button>
 
-          <Typography variant="body2" className="text-center">
+          <Typography variant="body2">
             Don’t have an account?{" "}
             <Link href="/register" underline="hover">
               Register here

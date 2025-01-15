@@ -44,7 +44,7 @@ export default function NavBar(): React.JSX.Element {
           alignItems: "center"
         }}
       >
-        <Box className="flex align-middle me-3">
+        <Box>
           <Link href="/dashboard">
             <Box
               sx={{
@@ -90,7 +90,7 @@ export default function NavBar(): React.JSX.Element {
           >
             {games.map(({ name, title }) => (
               <MenuItem key={name} onClick={() => handleChooseGame(name)}>
-                <Typography className="text-center">{title}</Typography>
+                <Typography>{title}</Typography>
               </MenuItem>
             ))}
           </Menu>

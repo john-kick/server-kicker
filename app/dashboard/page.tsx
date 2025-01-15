@@ -15,7 +15,6 @@ export default function Page(): React.JSX.Element {
     <div>
       {games.map(({ name, title, image }) => (
         <GameCard
-          className="pe-3"
           key={name}
           img={image}
           title={title}

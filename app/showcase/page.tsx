@@ -49,12 +49,12 @@ export default function Page() {
               <Typography variant="h5">
                 {color.charAt(0).toUpperCase() + color.slice(1)} Buttons
               </Typography>
-              <Container className="flex">
+              <Container>
                 {[false, true].map((disabled) => {
                   return (
-                    <Box key={disabled.toString()} className="me-2">
+                    <Box key={disabled.toString()}>
                       {buttonVariants.map((variant: ButtonVariant) => (
-                        <Box key={variant} className="pb-2">
+                        <Box key={variant}>
                           <Button
                             color={color}
                             variant={variant}
