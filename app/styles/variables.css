@@ -4,5 +4,8 @@
   --secondary-color: cyan;
   --tertiary-color: aquamarine;
   --paper: rgba(255, 255, 255, 0.05);
-  --error-background: rgb(81, 16, 16);
+  --info-background: darkcyan;
+  --success-background: seagreen;
+  --warning-background: darkgoldenrod;
+  --error-background: indianred;
 }

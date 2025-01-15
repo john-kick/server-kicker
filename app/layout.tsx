@@ -1,6 +1,6 @@
 "use client";
 
-import "./main.css";
+import "./styles/main.css";
 
 export default function RootLayout({
   children

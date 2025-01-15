@@ -1,5 +1,5 @@
 @import url("./variables.css");
-@import url("./(auth)/auth.css");
+@import url("../(auth)/styles/auth.css");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
@@ -15,7 +15,7 @@ body {
 }
 
 input {
-  padding: 8 16 8 16;
+  padding: 16 24 16 24;
   margin-bottom: 1rem;
   border: none;
   border-radius: 8px;
@@ -23,14 +23,14 @@ input {
 }
 
 input.invalid {
-  border: 2px solid darkred;
+  border: 2px solid var(--error-background);
 }
 
 button {
   background-color: var(--primary-color);
   border: none;
   border-radius: 8px;
-  padding: 8px 12px 8px 12px;
+  padding: 16 24 16 24;
   cursor: pointer;
 }
 

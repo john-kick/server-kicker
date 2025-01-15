@@ -73,7 +73,12 @@ export async function middleware(
   // }
 
   // Token is valid and access is allowed, refresh token if necessary
-  response.cookies.set({ name: "token", value: newToken, path: "/" });
+  response.cookies.set({
+    name: "token",
+    value: newToken,
+    path: "/",
+    sameSite: "none"
+  });
 
   return response;
 }

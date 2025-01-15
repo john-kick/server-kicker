@@ -1,0 +1,57 @@
+@import url("../../styles/variables.css");
+
+#auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#auth-wrapper h1 {
+  margin: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#auth-wrapper form {
+  display: flex;
+  flex-direction: column;
+}
+
+#login-form-wrapper,
+#registration-wrapper > * {
+  width: 24rem;
+}
+
+#auth-wrapper form > input,
+#auth-wrapper form > button {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+#auth-wrapper .error {
+  margin-bottom: 0.5rem;
+  color: darksalmon;
+}
+
+#registration-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#registration-wrapper > div:first-child {
+  margin-right: 2rem;
+}
+
+.validation-check:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.validation-check.valid {
+  background-color: var(--success-background);
+}
+
+.validation-check.invalid {
+  background-color: var(--warning-background);
+}
