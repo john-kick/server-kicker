@@ -4,6 +4,7 @@
 @import url("../components/NavBar.css");
 @import url("../showcase/showcase.css");
 @import url("./buttons.css");
+@import url("./dropdown.css");
 
 /* Base Styles */
 * {
@@ -96,46 +97,4 @@ input.invalid {
 .error-box {
   background-color: var(--error-background) !important;
   border-radius: 8px !important;
-}
-
-/* Dropdown Styles */
-.dropdown {
-  position: relative;
-}
-
-.dropdown .icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.125em;
-  margin-right: 0.5em;
-  transition: transform 0.1s linear;
-}
-
-.dropdown.open .icon {
-  transform: rotate(-180deg);
-}
-
-.dropdown menu {
-  display: none;
-  position: absolute;
-  list-style: none;
-  margin: 0;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: var(--dropdown-background);
-  color: var(--dropdown-text);
-}
-
-.dropdown.open menu {
-  display: block;
-}
-
-menu li {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }

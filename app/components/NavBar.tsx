@@ -25,10 +25,6 @@ export default function NavBar(): React.JSX.Element {
     setGameSelectionOpen((open) => !open);
   };
 
-  const handleCloseGameMenu = () => {
-    setGameSelectionOpen(false);
-  };
-
   const handleChooseGame = (game: string) => {
     setGameSelectionOpen(false);
     redirect(`/games/${game}`);
@@ -55,7 +51,7 @@ export default function NavBar(): React.JSX.Element {
         <div>
           {pages.map(({ title, path }) => (
             <button
-              className="small text"
+              className="text-primary"
               key={title}
               onClick={() => handlePageButtonClick(path)}
             >
@@ -64,7 +60,7 @@ export default function NavBar(): React.JSX.Element {
           ))}
         </div>
         <div className={"dropdown" + (gameSelectionOpen ? " open" : " closed")}>
-          <button className="small text" onClick={handleToggleGameMenu}>
+          <button className="text-primary" onClick={handleToggleGameMenu}>
             <svg
               className="icon"
               xmlns="http://www.w3.org/2000/svg"

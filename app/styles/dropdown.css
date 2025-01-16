@@ -1,0 +1,94 @@
+@import url("./variables.css");
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: "Roboto", serif;
+  color: var(--text-primary); /* Ensure text is visible */
+}
+
+.dropdown .icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  margin-right: 0.5em;
+  transition: transform 0.1s linear;
+  color: var(--text-primary); /* Icon color */
+}
+
+.dropdown.open .icon {
+  transform: rotate(-180deg); /* Icon rotation for dropdown indicator */
+}
+
+.dropdown menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Positions the menu below the dropdown trigger */
+  left: 0;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  background-color: var(--dropdown-background);
+  color: var(--text-primary); /* Ensures readable text color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for floating effect */
+  z-index: 10; /* Ensures the dropdown appears above other elements */
+  opacity: 0; /* Initially hidden */
+  visibility: hidden; /* Hidden to prevent interaction */
+  transition: opacity 0.2s ease, visibility 0.2s ease; /* Smooth transition for appearance */
+}
+
+.dropdown.open menu {
+  display: block;
+  opacity: 1;
+  visibility: visible; /* Makes dropdown visible */
+  animation: dropdown-fade-in 0.3s ease-out; /* Adds fade-in animation */
+}
+
+menu li {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effects */
+}
+
+menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+  color: var(--primary-color); /* Change text color on hover to match theme */
+}
+
+menu li:focus {
+  outline: none;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.15
+  ); /* Focus effect for better accessibility */
+  color: var(--primary-color); /* Focused item text color */
+}
+
+menu li.disabled {
+  cursor: not-allowed;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Dimmed background for disabled items */
+  color: var(--text-secondary); /* Dimmed text color for disabled items */
+}
+
+/* Optional: Add animation to menu for smoother appearance */
+@keyframes dropdown-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
