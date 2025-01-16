@@ -11,7 +11,9 @@ export default function Layout({
   return (
     <div>
       <NavBar />
-      <div id="page-content">{children}</div>
+      <div id="page-content">
+        <div id="showcase">{children}</div>
+      </div>
     </div>
   );
 }

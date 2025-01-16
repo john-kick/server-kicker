@@ -1,0 +1,41 @@
+@import url("../styles/variables.css");
+
+/* Container for the overall button grid */
+.button-col {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, auto); /* Rows sized automatically */
+  gap: 2rem; /* Space between rows */
+  padding: 1rem;
+  justify-items: left; /* Center the rows horizontally */
+}
+
+/* Individual button rows */
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(4, 256px); /* 3 button-blocks per row */
+  gap: 4rem; /* Space between button-blocks */
+  justify-content: center; /* Center the blocks in the row */
+  align-items: center; /* Align blocks vertically in the row */
+}
+
+/* Individual button blocks */
+.button-block {
+  display: flex;
+  flex-direction: row; /* Stack buttons vertically within the block */
+  gap: 0.5rem; /* Space between buttons in the block */
+  align-items: center; /* Center align buttons within the block */
+}
+
+section {
+  padding: 1rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.button-row h3 {
+  text-align: end;
+}

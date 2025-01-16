@@ -1,16 +1,38 @@
 :root {
-  --background-primary: darkslategray;
-  --background-secondary: slategray;
-  --primary-color: teal;
-  --secondary-color: cyan;
-  --tertiary-color: aquamarine;
-  --paper: rgba(255, 255, 255, 0.05);
-  --paper-2: rgba(255, 255, 255, 0.1);
-  --paper-3: rgba(255, 255, 255, 0.3);
-  --dropdown-background: black;
-  --info-background: darkcyan;
-  --success-background: seagreen;
-  --warning-background: darkgoldenrod;
-  --error-background: indianred;
-  --input-background: dimgray;
+  /* Backgrounds */
+  --background-primary: #1f1f1f; /* Dark slate gray */
+  --background-secondary: #2c2c2c; /* Darker shade of slate gray */
+
+  /* Primary, Secondary, and Tertiary Colors */
+  --primary-color: #008080; /* Teal */
+  --secondary-color: #00bcd4; /* Cyan (lighter shade for dark mode) */
+  --tertiary-color: #00e5e5; /* Light aquamarine */
+
+  /* Paper colors (for surfaces, cards, etc.) */
+  --paper: rgba(255, 255, 255, 0.1); /* Light transparent white */
+  --paper-2: rgba(255, 255, 255, 0.2); /* Slightly lighter for layering */
+  --paper-3: rgba(255, 255, 255, 0.3); /* Even lighter */
+
+  /* Dropdown background */
+  --dropdown-background: #121212; /* Near black for dropdown */
+
+  /* Info, Success, Warning, Error colors */
+  --info-background: #004d40; /* Dark cyan */
+  --success-background: #388e3c; /* Dark green */
+  --warning-background: #f57c00; /* Dark amber/orange */
+  --error-background: #d32f2f; /* Dark red */
+
+  /* Input background */
+  --input-background: #333333; /* Dark gray for input fields */
+
+  /* Text and border colors */
+  --text-primary: #e0e0e0; /* Light gray for text */
+  --text-secondary: #b0b0b0; /* Slightly darker gray */
+  --border-color: rgba(255, 255, 255, 0.2); /* Light border with transparency */
+
+  /* Adjust button text colors (more contrast) */
+  --button-text-color: #ffffff; /* White text for buttons */
+  --button-text-dark: #000000; /* Black text for light background buttons */
+
+  /* Use complementary colors for readability and contrast */
 }
