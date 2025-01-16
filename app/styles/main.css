@@ -1,22 +1,23 @@
 @import url("./variables.css");
-@import url("../(auth)/styles/auth.css");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("../components/NavBar.css");
-@import url("../showcase/showcase.css");
 @import url("./buttons.css");
 @import url("./dropdown.css");
+@import url("../(auth)/styles/auth.css");
+@import url("../showcase/showcase.css");
 @import url("../components/gamecard.css");
+@import url("../components/navbar.css");
+@import url("../components/alert.css");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* Base Styles */
 * {
   transition: all ease-in-out 0.1s;
-  color: white;
   font-size: 1rem;
   font-family: "Roboto", serif;
   font-weight: 400;
 }
 
 body {
+  color: white;
   background: var(--background-primary);
   margin: 0;
   padding: 0;
@@ -38,6 +39,7 @@ p {
 
 #page-title {
   font-size: 3rem;
+  color: white;
 }
 
 input {
@@ -98,4 +100,9 @@ input.invalid {
 .error-box {
   background-color: var(--error-background) !important;
   border-radius: 8px !important;
+}
+
+.fa-icon {
+  color: red;
+  margin-right: 1rem;
 }

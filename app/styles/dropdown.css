@@ -14,7 +14,7 @@
   vertical-align: -0.125em;
   margin-right: 0.5em;
   transition: transform 0.1s linear;
-  color: var(--text-primary); /* Icon color */
+  color: var(--text-primary);
 }
 
 .dropdown.open .icon {

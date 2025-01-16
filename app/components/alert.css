@@ -1,0 +1,84 @@
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: opacity 0.3s ease-in-out;
+  color: var(--text-primary); /* Text color for better contrast */
+}
+
+.alert-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.alert-content {
+  flex-grow: 1;
+}
+
+.alert-dismiss {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.alert-dismiss:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Info alert */
+.alert.info {
+  background-color: var(--info-background);
+  color: var(--text-primary);
+}
+
+.alert.success {
+  background-color: var(--success-background);
+  color: var(--text-primary);
+}
+
+.alert.warning {
+  background-color: var(--warning-background);
+  color: var(--text-primary);
+}
+
+.alert.error {
+  background-color: var(--error-background);
+  color: var(--text-primary);
+}
+
+.alert svg {
+  width: 1.5em;
+  height: 1.5em;
+  color: inherit; /* Inherit color from alert type */
+  margin-right: 1rem;
+}
+
+.alert-dismiss {
+  padding: 0;
+  margin-left: 1rem;
+}
+
+@media (max-width: 600px) {
+  .alert {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .alert-icon {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .alert-dismiss {
+    margin-top: 0.5rem;
+    align-self: flex-end;
+  }
+}
