@@ -1,11 +1,16 @@
 :root {
-  --background-color: #151a22;
+  --background-primary: darkslategray;
+  --background-secondary: slategray;
   --primary-color: teal;
   --secondary-color: cyan;
   --tertiary-color: aquamarine;
   --paper: rgba(255, 255, 255, 0.05);
+  --paper-2: rgba(255, 255, 255, 0.1);
+  --paper-3: rgba(255, 255, 255, 0.3);
+  --dropdown-background: black;
   --info-background: darkcyan;
   --success-background: seagreen;
   --warning-background: darkgoldenrod;
   --error-background: indianred;
+  --input-background: dimgray;
 }

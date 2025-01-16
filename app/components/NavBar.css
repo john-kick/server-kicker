@@ -1,0 +1,35 @@
+@import url("../styles/variables.css");
+
+nav#navbar {
+  background-color: var(--background-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.2);
+}
+
+#logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 4rem;
+}
+
+#logo-link h6 {
+  font-size: 1.5rem;
+}
+
+#logo-link img {
+  margin-right: 1rem;
+}
+
+#pages-wrapper {
+  flex-grow: 1;
+  display: flex;
+}
+
+#pages-wrapper button {
+  flex-basis: auto;
+  margin: 0 1rem 0 0;
+}

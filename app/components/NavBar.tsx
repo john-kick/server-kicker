@@ -1,108 +1,95 @@
 "use client";
 
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Typography
-} from "@mui/material";
+import { games } from "@/data/games";
+import logo from "@/images/logo192.png";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
-import logo from "@/images/logo192.png";
-import { games } from "@/data/games";
 
 export default function NavBar(): React.JSX.Element {
-  const [anchorElGames, setAnchorElGames] = useState<null | HTMLElement>(null);
+  const [gameSelectionOpen, setGameSelectionOpen] = useState(false);
 
-  const pages = ["dashboard", "showcase"];
+  const pages = [
+    {
+      title: "Dashboard",
+      path: "/dashboard"
+    },
+    {
+      title: "Showcase",
+      path: "/showcase"
+    }
+  ];
 
-  const handleOpenGameMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElGames(event.currentTarget);
+  const handleToggleGameMenu = () => {
+    setGameSelectionOpen((open) => !open);
   };
 
   const handleCloseGameMenu = () => {
-    setAnchorElGames(null);
+    setGameSelectionOpen(false);
   };
 
   const handleChooseGame = (game: string) => {
-    setAnchorElGames(null);
+    setGameSelectionOpen(false);
     redirect(`/games/${game}`);
   };
 
+  const router = useRouter();
+
+  const handlePageButtonClick = (path: string) => {
+    router.push(path);
+  };
+
+  const handleLogout = () => {
+    router.push("/logout");
+  };
+
   return (
-    <AppBar position="sticky" sx={{ zIndex: 1201 }}>
-      <Toolbar
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}
-      >
-        <Box>
-          <Link href="/dashboard">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none"
-              }}
-            >
-              <Image
-                src={logo}
-                alt="Server Kicker Logo"
-                width={40}
-                height={40}
-                style={{ marginRight: "10px" }}
-              />
-              <Typography variant="h6" sx={{ color: "white" }}>
-                Server Kicker
-              </Typography>
-            </Box>
-          </Link>
-        </Box>
+    <nav id="navbar">
+      <Link id="logo-link" href="/dashboard">
+        <Image src={logo} alt="Logo" width={40} height={40} />
+        <h6>Server Kicker</h6>
+      </Link>
 
-        <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-          {pages.map((page) => (
-            <Button
-              key={page}
-              sx={{ my: 2, color: "white", display: "block" }}
-              href={`/${page}`}
+      <div id="pages-wrapper">
+        <div>
+          {pages.map(({ title, path }) => (
+            <button
+              className="small text"
+              key={title}
+              onClick={() => handlePageButtonClick(path)}
             >
-              {page}
-            </Button>
+              {title}
+            </button>
           ))}
-          <Button
-            onClick={handleOpenGameMenu}
-            sx={{ my: 2, color: "white", display: "block" }}
-          >
+        </div>
+        <div className={"dropdown" + (gameSelectionOpen ? " open" : " closed")}>
+          <button className="small text" onClick={handleToggleGameMenu}>
+            <svg
+              className="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="#fff"
+                d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+              />
+            </svg>
             Games
-          </Button>
-          <Menu
-            open={Boolean(anchorElGames)}
-            anchorEl={anchorElGames}
-            onClose={handleCloseGameMenu}
-          >
+          </button>
+          <menu>
             {games.map(({ name, title }) => (
-              <MenuItem key={name} onClick={() => handleChooseGame(name)}>
-                <Typography>{title}</Typography>
-              </MenuItem>
+              <li key={name} onClick={() => handleChooseGame(name)}>
+                <p>{title}</p>
+              </li>
             ))}
-          </Menu>
-        </Box>
+          </menu>
+        </div>
+      </div>
 
-        {/* Logout Button */}
-        <IconButton color="inherit" href="/logout">
-          <Typography variant="button" sx={{ color: "white" }}>
-            Logout
-          </Typography>
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+      <button className="small text" onClick={handleLogout}>
+        Logout
+      </button>
+    </nav>
   );
 }

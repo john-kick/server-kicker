@@ -1,6 +1,7 @@
 @import url("./variables.css");
 @import url("../(auth)/styles/auth.css");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("../components/NavBar.css");
 
 * {
   transition: all ease-in-out 0.1s;
@@ -11,7 +12,23 @@
 }
 
 body {
-  background: var(--background-color);
+  background: var(--background-primary);
+  margin: 0;
+  padding: 0;
+}
+
+#page-content {
+  padding: 2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
 input {
@@ -19,7 +36,7 @@ input {
   margin-bottom: 1rem;
   border: none;
   border-radius: 8px;
-  background-color: dimgrey;
+  background-color: var(--input-background);
 }
 
 input.invalid {
@@ -30,12 +47,38 @@ button {
   background-color: var(--primary-color);
   border: none;
   border-radius: 8px;
-  padding: 16 24 16 24;
+  padding: 16 24;
   cursor: pointer;
+}
+
+button.small {
+  padding: 8 12;
+}
+
+button.text {
+  background-color: transparent;
+}
+
+button.text:hover {
+  background-color: #0001;
 }
 
 .paper {
   background-color: var(--paper);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.paper-2 {
+  background-color: var(--paper-2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.paper-3 {
+  background-color: var(--paper-3);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   border-radius: 8px;
@@ -76,4 +119,44 @@ button {
 .error-box {
   background-color: var(--error-background) !important;
   border-radius: 8px !important;
+}
+
+.dropdown .icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  margin-right: 0.5em;
+}
+.dropdown.open .icon {
+  transform: rotate(-180deg);
+}
+
+.dropdown .icon,
+.dropdown.open .icon {
+  transition: linear 0.1s;
+}
+
+.dropdown menu {
+  display: none;
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--dropdown-background);
+  color: var(--dropdown-text);
+}
+
+menu li {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.dropdown.open menu {
+  display: block;
 }
