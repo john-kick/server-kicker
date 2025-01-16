@@ -5,6 +5,7 @@
 @import url("../showcase/showcase.css");
 @import url("./buttons.css");
 @import url("./dropdown.css");
+@import url("../components/gamecard.css");
 
 /* Base Styles */
 * {
