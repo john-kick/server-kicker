@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 import Alert, { AlertType } from "../components/Alert";
 
 type AlertMessage = {
@@ -8,13 +8,15 @@ type AlertMessage = {
   type: AlertType;
   message: React.ReactNode;
   dismissible?: boolean;
+  autoDismiss?: number; // Duration in milliseconds
 };
 
 type AlertContextType = {
   showAlert: (
     type: AlertType,
     message: React.ReactNode,
-    dismissible?: boolean
+    dismissible?: boolean,
+    autoDismiss?: number
   ) => void;
 };
 
@@ -30,14 +32,28 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
   const showAlert = (
     type: AlertType,
     message: React.ReactNode,
-    dismissible = true
+    dismissible = true,
+    autoDismiss?: number
   ) => {
     const id = `alert-${alertIdCounter++}`;
-    setAlerts((prev) => [{ id, type, message, dismissible }, ...prev]);
+    setAlerts((prev) => [
+      ...prev,
+      { id, type, message, dismissible, autoDismiss }
+    ]);
+
+    if (autoDismiss) {
+      setTimeout(() => handleDismiss(id), autoDismiss * 1000);
+    }
   };
 
-  const dismissAlert = (id: string) => {
-    setAlerts((prev) => prev.filter((alert) => alert.id !== id));
+  const handleDismiss = (id: string) => {
+    // Add "alert-leave" class for animation
+    document.getElementById(id)?.classList.add("alert-leave");
+
+    // Delay removal to allow animation to complete
+    setTimeout(() => {
+      setAlerts((prev) => prev.filter((alert) => alert.id !== id));
+    }, 300); // Matches animation duration
   };
 
   return (
@@ -46,10 +62,11 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
       <div className="alert-wrapper">
         {alerts.map((alert) => (
           <Alert
+            id={alert.id}
             key={alert.id}
             type={alert.type}
             dismissible={alert.dismissible}
-            onDismiss={() => dismissAlert(alert.id)}
+            onDismiss={() => handleDismiss(alert.id)}
           >
             {alert.message}
           </Alert>

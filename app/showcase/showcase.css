@@ -40,3 +40,11 @@ h2 {
 .button-row h3 {
   text-align: end;
 }
+
+#alert-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 256px); /* 3 button-blocks per row */
+  gap: 4rem; /* Space between button-blocks */
+  justify-content: center; /* Center the blocks in the row */
+  align-items: center; /* Align blocks vertically in the row */
+}

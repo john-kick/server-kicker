@@ -7,7 +7,7 @@ export default function AlertButtonsField() {
   const { showAlert } = useAlert();
 
   return (
-    <div className="button-row">
+    <div id="alert-buttons">
       <button
         onClick={() => showAlert("info", "This is an info alert!", true)}
         className="alert-button info"
@@ -31,6 +31,14 @@ export default function AlertButtonsField() {
         className="alert-button error"
       >
         Error Alert
+      </button>
+      <button
+        onClick={() =>
+          showAlert("info", "This is an auto-dismiss alert!", false, 3)
+        }
+        className="alert-button info"
+      >
+        Auto-dismiss alert
       </button>
     </div>
   );
