@@ -83,7 +83,7 @@ export default function NavBar(): React.JSX.Element {
         </div>
       </div>
 
-      <button className="small text" onClick={handleLogout}>
+      <button className="text-primary" onClick={handleLogout}>
         Logout
       </button>
     </nav>

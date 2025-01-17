@@ -22,17 +22,20 @@ type AlertProps = {
   children: React.ReactNode;
   type: AlertType;
   dismissible?: boolean;
+  onDismiss?: () => void; // New prop for callback on dismiss
 };
 
 export default function Alert({
   children,
   type,
-  dismissible = false
+  dismissible = false,
+  onDismiss
 }: AlertProps): React.JSX.Element | null {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleDismiss = () => {
     setIsVisible(false);
+    if (onDismiss) onDismiss(); // Call the dismiss callback
   };
 
   if (!isVisible) return null;
