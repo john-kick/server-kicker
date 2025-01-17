@@ -1,5 +1,3 @@
-@import url("../styles/variables.css");
-
 nav#navbar {
   background-color: var(--background-secondary);
   display: flex;

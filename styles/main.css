@@ -1,8 +1,8 @@
 @import url("./variables.css");
 @import url("./buttons.css");
 @import url("./dropdown.css");
-@import url("../(auth)/styles/auth.css");
-@import url("../showcase/showcase.css");
+@import url("../app/(auth)/styles/auth.css");
+@import url("../app/showcase/showcase.css");
 @import url("../components/gamecard.css");
 @import url("../components/navbar.css");
 @import url("../components/alert.css");
@@ -105,4 +105,19 @@ input.invalid {
 .fa-icon {
   color: red;
   margin-right: 1rem;
+}
+
+/* Link Styling */
+a {
+  color: var(--primary-color); /* Default link color as primary color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover state */
+}
+
+/* Link Hover State */
+a:hover {
+  color: var(
+    --highlight-color
+  ); /* Change text color on hover to ensure good contrast */
+  text-shadow: 0 0 10px #fff;
 }

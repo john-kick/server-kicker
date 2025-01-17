@@ -1,64 +1,55 @@
 "use client";
 
-import { useAuth } from "@/app/hooks/useAuth";
-import Alert from "@mui/material/Alert";
+import { useAlert } from "@/hooks/useAlert";
+import { useAuth } from "@/hooks/useAuth";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import Form from "../components/Form";
 
 export default function Page(): React.JSX.Element {
   const authServerUrl = process.env.NEXT_PUBLIC_AUTH_SERVER_URL;
   const router = useRouter();
-  const { error, isLoading, makeRequest } = useAuth(authServerUrl!);
+  const { isLoading, makeRequest } = useAuth(authServerUrl!);
+  const { showAlert, clearAlerts } = useAlert();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
 
-    const form = event.target as HTMLFormElement;
-    const formData = new FormData(form);
+    try {
+      const result = await makeRequest("/login", "POST", {
+        username,
+        password
+      });
 
-    const result = await makeRequest("/login", "POST", {
-      username: formData.get("username"),
-      password: formData.get("password")
-    });
-
-    Cookies.set("token", result.token, { path: "/", sameSite: "strict" });
-    router.push("/dashboard");
+      Cookies.set("token", result.token, { path: "/", sameSite: "strict" });
+      router.push("/dashboard");
+      clearAlerts();
+    } catch (err) {
+      showAlert(
+        "error",
+        err instanceof Error ? err.message : "An unknown error occurred"
+      );
+    }
   };
 
   return (
     <div id="login-form-wrapper" className="paper">
       <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          id="username"
-          name="username"
-          placeholder="Username"
-          className={error ? "invalid" : ""}
-          required
-        />
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          className={error ? "invalid" : ""}
-          required
-        />
-
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? <span className="loader"></span> : "Login"}
-        </button>
-      </form>
+      <Form
+        username={username}
+        password={password}
+        onUsernameChange={(e) => setUsername(e.target.value)}
+        onPasswordChange={(e) => setPassword(e.target.value)}
+        onSubmit={handleLogin}
+        isLoading={isLoading}
+      />
       <p>
         Don&apos;t have an account? <a href="/register">Register here</a>
       </p>
-
-      {error && (
-        <Alert severity="error" className="error-box">
-          {error}
-        </Alert>
-      )}
     </div>
   );
 }

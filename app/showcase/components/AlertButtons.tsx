@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useAlert } from "../../hooks/useAlert";
+import { useAlert } from "@/hooks/useAlert";
 
 export default function AlertButtonsField() {
   const { showAlert } = useAlert();

@@ -1,5 +1,3 @@
-@import url("../styles/variables.css");
-
 /* Container for the overall button grid */
 .button-col {
   display: grid;

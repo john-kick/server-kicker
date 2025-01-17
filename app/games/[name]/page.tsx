@@ -1,6 +1,6 @@
 "use client";
 
-import GameCard from "@/app/components/GameCard";
+import GameCard from "@/components/GameCard";
 import { games } from "@/data/games";
 import { StaticImageData } from "next/image";
 import { useParams, useRouter } from "next/navigation";

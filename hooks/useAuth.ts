@@ -5,7 +5,6 @@ export function useAuth(authServerUrl: string) {
     throw new Error("NEXT_PUBLIC_AUTH_SERVER_URL must be set in .env");
   }
 
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const makeRequest = async (
@@ -14,7 +13,7 @@ export function useAuth(authServerUrl: string) {
     body: Record<string, unknown>
   ) => {
     setIsLoading(true);
-    setError(null);
+
     try {
       const response = await fetch(authServerUrl + endpoint, {
         method,
@@ -28,13 +27,10 @@ export function useAuth(authServerUrl: string) {
       }
 
       return await response.json();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unknown error occurred");
-      throw err;
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { error, isLoading, makeRequest, setError };
+  return { isLoading, makeRequest };
 }

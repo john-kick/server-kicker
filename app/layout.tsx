@@ -1,10 +1,10 @@
 "use client";
 
-import "./styles/main.css";
+import "@/styles/main.css";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { AlertProvider } from "./provider/AlertProvider";
+import { AlertProvider } from "@/provider/AlertProvider";
 config.autoAddCss = false;
 
 export default function RootLayout({

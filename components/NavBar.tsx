@@ -1,6 +1,7 @@
 "use client";
 
 import { games } from "@/data/games";
+import { useAlert } from "@/hooks/useAlert";
 import logo from "@/images/logo192.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,7 @@ import { useState } from "react";
 
 export default function NavBar(): React.JSX.Element {
   const [gameSelectionOpen, setGameSelectionOpen] = useState(false);
+  const { showAlert } = useAlert();
 
   const pages = [
     {
@@ -37,6 +39,7 @@ export default function NavBar(): React.JSX.Element {
   };
 
   const handleLogout = () => {
+    showAlert("success", "Logged out.", true, 5);
     router.push("/logout");
   };
 

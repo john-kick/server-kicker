@@ -8,7 +8,7 @@ type AlertMessage = {
   type: AlertType;
   message: React.ReactNode;
   dismissible?: boolean;
-  autoDismiss?: number; // Duration in milliseconds
+  autoDismiss?: number; // Duration in seconds
 };
 
 type AlertContextType = {
@@ -18,6 +18,7 @@ type AlertContextType = {
     dismissible?: boolean,
     autoDismiss?: number
   ) => void;
+  clearAlerts: () => void;
 };
 
 export const AlertContext = createContext<AlertContextType | undefined>(
@@ -37,13 +38,17 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
   ) => {
     const id = `alert-${alertIdCounter++}`;
     setAlerts((prev) => [
-      ...prev,
-      { id, type, message, dismissible, autoDismiss }
+      { id, type, message, dismissible, autoDismiss },
+      ...prev
     ]);
 
     if (autoDismiss) {
       setTimeout(() => handleDismiss(id), autoDismiss * 1000);
     }
+  };
+
+  const clearAlerts = () => {
+    setAlerts([]);
   };
 
   const handleDismiss = (id: string) => {
@@ -57,7 +62,7 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AlertContext.Provider value={{ showAlert }}>
+    <AlertContext.Provider value={{ showAlert, clearAlerts }}>
       {children}
       <div className="alert-wrapper">
         {alerts.map((alert) => (

@@ -1,6 +1,6 @@
+import { jwtVerify } from "jose"; // Import the jose library for JWT verification
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { jwtVerify } from "jose"; // Import the jose library for JWT verification
 
 type TokenData = {
   username: string;

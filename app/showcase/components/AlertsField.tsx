@@ -1,4 +1,4 @@
-import Alert, { AlertType } from "../../components/Alert";
+import Alert, { AlertType } from "@/components/Alert";
 
 const alertTypes: { type: AlertType; message: string }[] = [
   { type: "info", message: "Info" },
