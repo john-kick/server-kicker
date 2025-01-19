@@ -61,22 +61,22 @@
 
 /* Info alert */
 .alert.info {
-  background-color: var(--info-background);
+  background-color: var(--info-color);
   color: var(--text-primary);
 }
 
 .alert.success {
-  background-color: var(--success-background);
+  background-color: var(--success-color);
   color: var(--text-primary);
 }
 
 .alert.warning {
-  background-color: var(--warning-background);
+  background-color: var(--warning-color);
   color: var(--text-primary);
 }
 
 .alert.error {
-  background-color: var(--error-background);
+  background-color: var(--error-color);
   color: var(--text-primary);
 }
 

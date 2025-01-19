@@ -1,4 +1,4 @@
-import { Alert } from "@mui/material";
+import Alert from "@/components/Alert";
 
 type ValidationMessage = {
   condition: boolean;
@@ -16,11 +16,9 @@ export default function ValidationBox({
     <div id="validation-box" className="paper">
       {validationMessages.map((validation, index) => (
         <Alert
+          id={index.toString()}
           key={index}
-          severity={validation.condition ? "success" : "warning"}
-          className={`validation-check ${
-            validation.condition ? "valid" : "invalid"
-          }`}
+          type={validation.condition ? "success" : "warning"}
         >
           {validation.message}
         </Alert>

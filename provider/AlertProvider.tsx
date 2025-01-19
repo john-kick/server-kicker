@@ -3,7 +3,7 @@
 import React, { createContext, ReactNode, useState } from "react";
 import Alert, { AlertType } from "../components/Alert";
 
-type AlertMessage = {
+export type AlertMessage = {
   id: string;
   type: AlertType;
   message: React.ReactNode;
@@ -70,7 +70,6 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
             id={alert.id}
             key={alert.id}
             type={alert.type}
-            dismissible={alert.dismissible}
             onDismiss={() => handleDismiss(alert.id)}
           >
             {alert.message}

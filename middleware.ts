@@ -77,7 +77,7 @@ export async function middleware(
     name: "token",
     value: newToken,
     path: "/",
-    sameSite: "none"
+    sameSite: "strict"
   });
 
   return response;

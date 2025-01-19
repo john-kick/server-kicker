@@ -20,10 +20,11 @@
   --dropdown-background: #121212; /* Near black for dropdown */
 
   /* Info, Success, Warning, Error colors */
-  --info-background: #075245; /* Dark cyan */
-  --success-background: #388e3c; /* Dark green */
-  --warning-background: #f57c00; /* Dark amber/orange */
-  --error-background: #d32f2f; /* Dark red */
+  --info-color: #075245; /* Dark cyan */
+  --success-color: #388e3c; /* Dark green */
+  --warning-color: #f57c00; /* Dark amber/orange */
+  --error-color: #d32f2f; /* Dark red */
+  --disabled-color: #b0b0b0;
 
   /* Input background */
   --input-background: #333333; /* Dark gray for input fields */

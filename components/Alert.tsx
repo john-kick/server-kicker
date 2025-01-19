@@ -1,13 +1,13 @@
 "use client";
 
-import React, { ComponentPropsWithoutRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faInfoCircle,
   faCheckCircle,
+  faExclamationCircle,
   faExclamationTriangle,
-  faExclamationCircle
+  faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { ComponentPropsWithoutRef } from "react";
 
 export type AlertType = "info" | "success" | "warning" | "error";
 
@@ -19,25 +19,28 @@ const iconMap: Record<AlertType, React.ReactNode> = {
 };
 
 interface AlertProps extends ComponentPropsWithoutRef<"div"> {
+  id: string;
   children: React.ReactNode;
   type: AlertType;
-  dismissible?: boolean;
-  onDismiss?: () => void; // New prop for callback on dismiss
+  onDismiss?: () => void;
 }
 
 export default function Alert({
+  id,
   children,
   type,
-  dismissible = false,
   onDismiss,
   ...props
 }: AlertProps): React.JSX.Element | null {
   const handleDismiss = () => {
-    if (onDismiss) onDismiss(); // Call the dismiss callback
+    if (onDismiss) {
+      onDismiss();
+    }
   };
 
   return (
     <div
+      id={id}
       className={`alert ${type}`}
       aria-live="assertive"
       aria-atomic="true"
@@ -45,7 +48,7 @@ export default function Alert({
     >
       <div className="alert-icon">{iconMap[type]}</div>
       <div className="alert-content">{children}</div>
-      {dismissible && (
+      {onDismiss && (
         <button
           className="alert-dismiss"
           onClick={handleDismiss}

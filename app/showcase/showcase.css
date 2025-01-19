@@ -9,19 +9,23 @@
 
 /* Individual button rows */
 .button-row {
-  display: grid;
-  grid-template-columns: repeat(4, 256px); /* 3 button-blocks per row */
-  gap: 4rem; /* Space between button-blocks */
-  justify-content: center; /* Center the blocks in the row */
-  align-items: center; /* Align blocks vertically in the row */
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+
+  & > h3 {
+    width: 100px;
+    text-align: center;
+  }
 }
 
 /* Individual button blocks */
 .button-block {
   display: flex;
-  flex-direction: row; /* Stack buttons vertically within the block */
-  gap: 0.5rem; /* Space between buttons in the block */
-  align-items: center; /* Center align buttons within the block */
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 section {
@@ -40,9 +44,17 @@ h2 {
 }
 
 #alert-buttons {
-  display: grid;
-  grid-template-columns: repeat(5, 256px); /* 3 button-blocks per row */
-  gap: 4rem; /* Space between button-blocks */
-  justify-content: center; /* Center the blocks in the row */
-  align-items: center; /* Align blocks vertically in the row */
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  justify-content: left;
+  align-items: center;
+
+  & > button {
+    flex-grow: 0;
+  }
+}
+
+#reset {
+  margin-bottom: 1rem;
 }

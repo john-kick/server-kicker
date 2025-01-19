@@ -7,39 +7,54 @@ export default function AlertButtonsField() {
   const { showAlert } = useAlert();
 
   return (
-    <div id="alert-buttons">
-      <button
-        onClick={() => showAlert("info", "This is an info alert!", true)}
-        className="alert-button info"
-      >
-        Info Alert
-      </button>
-      <button
-        onClick={() => showAlert("success", "This is a success alert!", true)}
-        className="alert-button success"
-      >
-        Success Alert
-      </button>
-      <button
-        onClick={() => showAlert("warning", "This is a warning alert!", true)}
-        className="alert-button warning"
-      >
-        Warning Alert
-      </button>
-      <button
-        onClick={() => showAlert("error", "This is an error alert!", true)}
-        className="alert-button error"
-      >
-        Error Alert
-      </button>
-      <button
-        onClick={() =>
-          showAlert("info", "This is an auto-dismiss alert!", false, 3)
-        }
-        className="alert-button info"
-      >
-        Auto-dismiss alert
-      </button>
-    </div>
+    <>
+      <h2>Buttons</h2>
+      <div id="alert-buttons">
+        <button
+          onClick={() => showAlert("info", "This is an info alert!", true)}
+          className="alert-button info"
+        >
+          Info Alert
+        </button>
+        <button
+          onClick={() => showAlert("success", "This is a success alert!", true)}
+          className="alert-button success"
+        >
+          Success Alert
+        </button>
+        <button
+          onClick={() => showAlert("warning", "This is a warning alert!", true)}
+          className="alert-button warning"
+        >
+          Warning Alert
+        </button>
+        <button
+          onClick={() => showAlert("error", "This is an error alert!", true)}
+          className="alert-button error"
+        >
+          Error Alert
+        </button>
+        <button
+          onClick={() =>
+            showAlert("info", "This is an auto-dismiss alert!", false, 3)
+          }
+          className="alert-button info"
+        >
+          Auto-dismiss alert
+        </button>
+        <button
+          onClick={() =>
+            showAlert(
+              "info",
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              true
+            )
+          }
+          className="alert-button info"
+        >
+          Lorem ipsum
+        </button>
+      </div>
+    </>
   );
 }

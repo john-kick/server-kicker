@@ -3,7 +3,7 @@
 /* Base button styles */
 button {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
   text-align: center;
@@ -12,58 +12,6 @@ button {
   border-radius: 5px;
   transition: all 0.3s ease;
   border: 2px solid transparent;
-  background-color: var(--primary-color); /* Default background color */
-  color: white; /* Default text color */
-  border-color: var(--primary-color); /* Default border color */
-}
-
-/* Button color classes */
-button.primary {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-button.secondary {
-  background-color: var(--secondary-color);
-  color: white;
-  border-color: var(--secondary-color);
-}
-
-button.tertiary {
-  background-color: var(--tertiary-color);
-  color: black;
-  border-color: var(--tertiary-color);
-}
-
-button.info {
-  background-color: var(--info-background);
-  color: white;
-  border-color: var(--info-background);
-}
-
-button.success {
-  background-color: var(--success-background);
-  color: white;
-  border-color: var(--success-background);
-}
-
-button.warning {
-  background-color: var(--warning-background);
-  color: white;
-  border-color: var(--warning-background);
-}
-
-button.error {
-  background-color: var(--error-background);
-  color: white;
-  border-color: var(--error-background);
-}
-
-button.paper {
-  background-color: var(--paper);
-  color: black;
-  border-color: var(--paper);
 }
 
 /* Button size classes */
@@ -92,96 +40,131 @@ button.large .icon {
   height: 1.25em;
 }
 
-/* Button type (outline) classes */
-button.outline {
-  background-color: transparent;
-  color: inherit;
-  border-color: currentColor;
-}
-
-button.outline-primary {
-  color: var(--primary-color);
+button,
+button.primary {
+  background-color: var(--primary-color);
+  color: white;
   border-color: var(--primary-color);
-  background-color: transparent;
+
+  &.outline {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+  }
+
+  &.text {
+    color: var(--primary-color);
+    background-color: transparent;
+    border: none;
+  }
 }
 
-button.outline-secondary {
-  color: var(--secondary-color);
+button.secondary {
+  background-color: var(--secondary-color);
+  color: white;
   border-color: var(--secondary-color);
-  background-color: transparent;
+
+  &.outline {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    background-color: transparent;
+  }
+
+  &.text {
+    color: var(--secondary-color);
+    background-color: transparent;
+    border: none;
+  }
 }
 
-button.outline-tertiary {
-  color: var(--tertiary-color);
+button.tertiary {
+  background-color: var(--tertiary-color);
+  color: black;
   border-color: var(--tertiary-color);
-  background-color: transparent;
+
+  &.outline {
+    color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
+    background-color: transparent;
+  }
+
+  &.text {
+    color: var(--tertiary-color);
+    background-color: transparent;
+    border: none;
+  }
 }
 
-button.outline-info {
-  color: var(--info-background);
-  border-color: var(--info-background);
-  background-color: transparent;
+button.info {
+  background-color: var(--info-color);
+  color: white;
+  border-color: transparent;
+
+  &.outline {
+    color: var(--info-color);
+    border-color: var(--info-color);
+    background-color: transparent;
+  }
+
+  &.text {
+    color: var(--info-color);
+    background-color: transparent;
+    border: none;
+  }
 }
 
-button.outline-success {
-  color: var(--success-background);
-  border-color: var(--success-background);
-  background-color: transparent;
+button.success {
+  background-color: var(--success-color);
+  color: white;
+  border-color: var(--success-color);
+
+  &.outline {
+    color: var(--success-color);
+    border-color: var(--success-color);
+    background-color: transparent;
+  }
+
+  &.text {
+    color: var(--success-color);
+    background-color: transparent;
+    border: none;
+  }
 }
 
-button.outline-warning {
-  color: var(--warning-background);
-  border-color: var(--warning-background);
-  background-color: transparent;
+button.warning {
+  background-color: var(--warning-color);
+  color: white;
+  border-color: var(--warning-color);
+
+  &.outline {
+    color: var(--warning-color);
+    border-color: var(--warning-color);
+    background-color: transparent;
+  }
+
+  &.text {
+    color: var(--warning-color);
+    background-color: transparent;
+    border: none;
+  }
 }
 
-button.outline-error {
-  color: var(--error-background);
-  border-color: var(--error-background);
-  background-color: transparent;
-}
+button.error {
+  background-color: var(--error-color);
+  color: white;
+  border-color: var(--error-color);
 
-/* Text button colors (No background) */
-button.text-primary {
-  color: var(--primary-color);
-  background-color: transparent;
-  border: none;
-}
+  &.outline {
+    color: var(--error-color);
+    border-color: var(--error-color);
+    background-color: transparent;
+  }
 
-button.text-secondary {
-  color: var(--secondary-color);
-  background-color: transparent;
-  border: none;
-}
-
-button.text-tertiary {
-  color: var(--tertiary-color);
-  background-color: transparent;
-  border: none;
-}
-
-button.text-info {
-  color: var(--info-background);
-  background-color: transparent;
-  border: none;
-}
-
-button.text-success {
-  color: var(--success-background);
-  background-color: transparent;
-  border: none;
-}
-
-button.text-warning {
-  color: var(--warning-background);
-  background-color: transparent;
-  border: none;
-}
-
-button.text-error {
-  color: var(--error-background);
-  background-color: transparent;
-  border: none;
+  &.text {
+    color: var(--error-color);
+    background-color: transparent;
+    border: none;
+  }
 }
 
 /* Hover and Focus effects */
@@ -194,7 +177,16 @@ button:focus {
 /* Disabled button */
 button:disabled {
   background-color: var(--input-background);
-  color: #b0b0b0;
+  color: var(--disabled-color);
   border-color: var(--input-background);
-  cursor: not-allowed;
+  cursor: default;
+}
+
+button.outline:disabled {
+  border-color: var(--disabled-color);
+  color: var(--disabled-color);
+}
+
+button.text:disabled {
+  color: var(--disabled-color);
 }

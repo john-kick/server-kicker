@@ -5,6 +5,7 @@ import "@/styles/main.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { AlertProvider } from "@/provider/AlertProvider";
+import DevMessageProvider from "@/provider/DevMessageProvider";
 config.autoAddCss = false;
 
 export default function RootLayout({
@@ -24,6 +25,7 @@ export default function RootLayout({
       </head>
       <body>
         <AlertProvider>{children}</AlertProvider>
+        <DevMessageProvider />
       </body>
     </html>
   );

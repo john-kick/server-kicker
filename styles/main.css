@@ -11,7 +11,7 @@
 /* Base Styles */
 * {
   color: var(--text-primary);
-  transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.3s;
   font-size: 1rem;
   font-family: "Roboto", serif;
   font-weight: 400;
@@ -120,4 +120,16 @@ a:hover {
     --highlight-color
   ); /* Change text color on hover to ensure good contrast */
   text-shadow: 0 0 10px #fff;
+}
+
+#dev-message {
+  pointer-events: none;
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+
+  & strong {
+    font-weight: 900;
+  }
 }

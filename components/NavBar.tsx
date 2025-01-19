@@ -54,7 +54,7 @@ export default function NavBar(): React.JSX.Element {
         <div>
           {pages.map(({ title, path }) => (
             <button
-              className="text-primary"
+              className="primary text"
               key={title}
               onClick={() => handlePageButtonClick(path)}
             >
@@ -63,7 +63,7 @@ export default function NavBar(): React.JSX.Element {
           ))}
         </div>
         <div className={"dropdown" + (gameSelectionOpen ? " open" : " closed")}>
-          <button className="text-primary" onClick={handleToggleGameMenu}>
+          <button className="primary text" onClick={handleToggleGameMenu}>
             <svg
               className="icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ export default function NavBar(): React.JSX.Element {
         </div>
       </div>
 
-      <button className="text-primary" onClick={handleLogout}>
+      <button className="secondary text" onClick={handleLogout}>
         Logout
       </button>
     </nav>
