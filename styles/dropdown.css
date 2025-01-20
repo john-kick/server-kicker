@@ -42,6 +42,7 @@
 
 .dropdown.open menu {
   display: block;
+  position: absolute;
   opacity: 1;
   visibility: visible; /* Makes dropdown visible */
   animation: dropdown-fade-in 0.3s ease-out; /* Adds fade-in animation */

@@ -1,10 +1,10 @@
 "use client";
 
-import GameCard from "@/components/GameCard";
 import { games } from "@/data/games";
 import { StaticImageData } from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ServerCard from "../components/ServerCard";
 
 export default function GamePage(): React.JSX.Element {
   const router = useRouter();
@@ -26,13 +26,16 @@ export default function GamePage(): React.JSX.Element {
     }
   }, [params?.name, router]);
 
-  const toDashboard = () => {
-    router.push("/dashboard");
-  };
-
   if (!game) {
     return <div>Loading...</div>;
   }
 
-  return <GameCard img={game.image} title={game.title} onClick={toDashboard} />;
+  return (
+    <>
+      <h1 id="page-title">{game.title}</h1>
+      <div>
+        <ServerCard name="Mega cool test server" id="123456789" />
+      </div>
+    </>
+  );
 }

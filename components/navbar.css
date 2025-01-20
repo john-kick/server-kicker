@@ -7,7 +7,6 @@ nav#navbar {
   box-shadow: 0 4px 8px rgb(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
-  overflow: hidden;
 }
 
 #logo-link {

@@ -3,6 +3,7 @@
 @import url("./dropdown.css");
 @import url("../app/(auth)/styles/auth.css");
 @import url("../app/showcase/showcase.css");
+@import url("../app/games/components/serverCard.css");
 @import url("../components/gamecard.css");
 @import url("../components/navbar.css");
 @import url("../components/alert.css");
@@ -123,13 +124,49 @@ a:hover {
 }
 
 #dev-message {
-  pointer-events: none;
+  display: flex;
   position: fixed;
-  left: 50%;
+  left: 1rem;
   bottom: 1rem;
-  transform: translateX(-50%);
+  background-color: #121212;
+  padding: 2rem;
+  border-radius: 1rem;
+  animation: arrive 0.3s ease-out normal;
+
+  width: 16rem;
+  line-height: 2rem;
 
   & strong {
     font-weight: 900;
+  }
+
+  & > button {
+    color: white;
+  }
+
+  & p:first-child {
+    margin-bottom: 1rem;
+  }
+
+  &.leave {
+    animation: leave 0.3s ease-in normal;
+  }
+}
+
+@keyframes arrive {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes leave {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
   }
 }

@@ -20,6 +20,10 @@ export default function NavBar(): React.JSX.Element {
     {
       title: "Showcase",
       path: "/showcase"
+    },
+    {
+      title: "Test",
+      path: "/test"
     }
   ];
 

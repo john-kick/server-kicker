@@ -53,6 +53,8 @@
   color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: color 0.3s ease;
+  padding: 0;
+  margin-left: 1rem;
 }
 
 .alert-dismiss:hover {
@@ -85,11 +87,6 @@
   height: 1.5em;
   color: inherit; /* Inherit color from alert type */
   margin-right: 1rem;
-}
-
-.alert-dismiss {
-  padding: 0;
-  margin-left: 1rem;
 }
 
 /* Keyframes for Animations */

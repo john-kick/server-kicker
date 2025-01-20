@@ -1,6 +1,7 @@
 import { StaticImageData } from "next/image";
 import MinecraftImage from "@/images/Minecraft.png";
 import SatisfactoryImage from "@/images/Satisfactory.png";
+import WreckfestImage from "@/images/Wreckfest.png";
 
 export type GameData = {
   name: string;
@@ -14,5 +15,10 @@ export const games: GameData[] = [
     name: "satisfactory",
     title: "Satisfactory",
     image: SatisfactoryImage
+  },
+  {
+    name: "wreckfest",
+    title: "Wreckfest",
+    image: WreckfestImage
   }
 ];
