@@ -2,20 +2,45 @@
   display: inline-block;
   margin-right: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 4 8 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   padding: 2rem;
-  background-color: var(--background-secondary);
-
-  & > *:not(:last-child) {
-    margin-bottom: 1rem;
-  }
+  background-color: var(--bg-secondary);
+  max-width: 400px;
 }
 
-.server-card > h3 {
+.server-card > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.server-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.server-card > .title {
   font-size: 2rem;
+  color: var(--text-primary);
 }
 
-.server-card > p {
+.server-card > .id {
   font-size: 1rem;
-  color: gray;
+  color: var(--text-secondary);
+}
+
+.server-card > .badge {
+  background-color: var(--bg-disabled);
+  padding: 0.5rem;
+  color: var(--text-disabled);
+  font-weight: 500;
+  border-radius: 1rem;
+  width: fit-content;
+}
+
+.server-card.active {
+  box-shadow: 0 4px 8px var(--focus-outline);
+}
+
+.server-card.active > .badge {
+  background-color: var(--bg-alert-success);
+  color: var(--text-alert-success);
 }

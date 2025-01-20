@@ -1,42 +1,66 @@
+/* Dark Theme Variables */
+
 :root {
-  /* Backgrounds */
-  --background-primary: #1f1f1f; /* Dark slate gray */
-  --background-secondary: #2c2c2c; /* Darker shade of slate gray */
+  /* Background Colors */
+  --bg-primary: #181818; /* Page background */
+  --bg-secondary: #242424; /* Secondary background (for cards, modals, etc.) */
+  --bg-alert-info: #1f3c6d; /* Info alert background */
+  --bg-alert-success: #1f6b30; /* Success alert background */
+  --bg-alert-warning: #6a4f1b; /* Warning alert background */
+  --bg-alert-error: #6d1f1f; /* Error alert background */
+  --bg-disabled: #3a3a3a; /* Disabled element background */
 
-  /* Primary, Secondary, and Tertiary Colors */
-  --primary-color: #00a3a3; /* Brighter teal for better contrast */
-  --secondary-color: #00bcd4; /* Cyan (lighter shade for dark mode) */
-  --tertiary-color: #00e5e5; /* Light aquamarine */
+  /* Text Colors */
+  --text-primary: #e0e0e0; /* Main text */
+  --text-secondary: #b0b0b0; /* Secondary text (subheadings, captions, etc.) */
+  --text-muted: #808080; /* Muted text (disabled, placeholders, etc.) */
+  --text-button: #f1f1f1; /* Button text */
+  --text-button-dark: #f1f1f1; /* Button text */
+  --text-alert-info: #e0eaff; /* Info alert text */
+  --text-alert-success: #a7f1a7; /* Success alert text */
+  --text-alert-warning: #f1f0a7; /* Warning alert text */
+  --text-alert-error: #f1a7a7; /* Error alert text */
+  --text-disabled: #6e6e6e; /* Disabled text color */
 
-  /* Highlight Color */
-  --highlight-color: #00e5e5; /* Light aquamarine used as the highlight color */
+  /* Button Colors */
+  --button-primary: #218cff; /* Primary button background */
+  --button-primary-hover: #1b78dd; /* Primary button hover */
+  --button-secondary: #375875; /* Secondary button background */
+  --button-secondary-hover: #263e53; /* Secondary button hover */
+  --button-success: #28a745; /* Success button background */
+  --button-success-hover: #218838; /* Success button hover */
+  --button-danger: #dc3545; /* Danger button background */
+  --button-danger-hover: #c82333; /* Danger button hover */
+  --button-warning: #a87e00; /* Warning button background */
+  --button-warning-hover: #997300; /* Warning button hover */
+  --button-info: #17a2b8; /* Info button background */
+  --button-info-hover: #138496; /* Info button hover */
 
-  /* Paper colors (for surfaces, cards, etc.) */
-  --paper: rgba(255, 255, 255, 0.1); /* Light transparent white */
-  --paper-2: rgba(255, 255, 255, 0.2); /* Slightly lighter for layering */
-  --paper-3: rgba(255, 255, 255, 0.3); /* Even lighter */
+  /* Border Colors */
+  --border-primary: #444444; /* Primary border color */
+  --border-muted: #666666; /* Muted border color */
 
-  /* Dropdown background */
-  --dropdown-background: #121212; /* Near black for dropdown */
+  /* Focus and Hover States */
+  --focus-outline: #007bff; /* Focus outline for inputs and buttons */
+  --hover-background: #3a3a3a; /* Hover state background for items */
+  --hover-text: #f0f0f0; /* Hover text color */
 
-  /* Info, Success, Warning, Error colors */
-  --info-color: #075245; /* Dark cyan */
-  --success-color: #388e3c; /* Dark green */
-  --warning-color: #f57c00; /* Dark amber/orange */
-  --error-color: #d32f2f; /* Dark red */
-  --disabled-color: #b0b0b0;
+  /* Input Field Colors */
+  --input-bg: #2a2a2a; /* Input field background */
+  --input-bg-focus: #333333; /* Input field background when focused */
+  --input-border: #444444; /* Input border color */
+  --input-border-focus: #007bff; /* Input border color when focused */
+  --input-text: #e0e0e0; /* Input text color */
+  --input-placeholder: #808080; /* Input placeholder text color */
+  --input-disabled-bg: #3a3a3a; /* Disabled input field background */
+  --input-disabled-text: #6e6e6e; /* Disabled input field text color */
 
-  /* Input background */
-  --input-background: #333333; /* Dark gray for input fields */
-
-  /* Text and border colors */
-  --text-primary: #e0e0e0; /* Light gray for text */
-  --text-secondary: #b0b0b0; /* Slightly darker gray */
-  --border-color: rgba(255, 255, 255, 0.2); /* Light border with transparency */
-
-  /* Adjust button text colors (more contrast) */
-  --button-text-color: #ffffff; /* White text for buttons */
-  --button-text-dark: #000000; /* Black text for light background buttons */
-
-  /* Use complementary colors for readability and contrast */
+  --dropdown-bg: #2c2c2c; /* Dropdown background */
+  --dropdown-border: #444444; /* Dropdown border color */
+  --dropdown-item-bg: #2a2a2a; /* Dropdown item background */
+  --dropdown-item-hover-bg: #3a3a3a; /* Dropdown item background on hover */
+  --dropdown-item-text: #e0e0e0; /* Dropdown item text color */
+  --dropdown-item-text-hover: #ffffff; /* Dropdown item text color on hover */
+  --dropdown-item-disabled-bg: #3a3a3a; /* Disabled dropdown item background */
+  --dropdown-item-disabled-text: #6e6e6e; /* Disabled dropdown item text color */
 }

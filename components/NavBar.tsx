@@ -90,7 +90,7 @@ export default function NavBar(): React.JSX.Element {
         </div>
       </div>
 
-      <button className="secondary text" onClick={handleLogout}>
+      <button className="primary text" onClick={handleLogout}>
         Logout
       </button>
     </nav>

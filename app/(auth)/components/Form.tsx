@@ -54,7 +54,13 @@ export default function Form({
         />
       )}
       <button type="submit" disabled={isLoading}>
-        {isLoading ? <span className="loader"></span> : "Submit"}
+        {isLoading ? (
+          <span className="loader"></span>
+        ) : passwordRepetition ? (
+          "Register"
+        ) : (
+          "Login"
+        )}
       </button>
     </form>
   );

@@ -15,7 +15,7 @@ export default function GameCard({
   return (
     <div className="gamecard" onClick={onClick}>
       <Image alt={title} src={img} />
-      <h6>{title}</h6>
+      <h5>{title}</h5>
     </div>
   );
 }

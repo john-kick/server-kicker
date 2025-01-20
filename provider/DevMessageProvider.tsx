@@ -26,7 +26,7 @@ export default function DevMessageProvider(): React.JSX.Element | null {
         </p>
       </div>
       <button
-        className="alert-dismiss"
+        className="text primary"
         onClick={handleDismiss}
         aria-label="Close"
       >

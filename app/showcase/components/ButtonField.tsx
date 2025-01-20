@@ -3,11 +3,10 @@ const BUTTON_TYPES = [null, "outline", "text"];
 const BUTTON_COLORS = [
   { color: "primary", title: "Primary" },
   { color: "secondary", title: "Secondary" },
-  { color: "tertiary", title: "Tertiary" },
   { color: "info", title: "Info" },
   { color: "success", title: "Success" },
   { color: "warning", title: "Warning" },
-  { color: "error", title: "Error" }
+  { color: "danger", title: "Danger" }
 ];
 
 export default function ButtonField() {

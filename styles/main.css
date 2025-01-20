@@ -1,7 +1,7 @@
 @import url("./variables.css");
 @import url("./buttons.css");
 @import url("./dropdown.css");
-@import url("../app/(auth)/styles/auth.css");
+@import url("../app/(auth)/auth.css");
 @import url("../app/showcase/showcase.css");
 @import url("../app/games/components/serverCard.css");
 @import url("../components/gamecard.css");
@@ -10,7 +10,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* Base Styles */
-* {
+:root {
   color: var(--text-primary);
   transition: all ease-in-out 0.3s;
   font-size: 1rem;
@@ -19,13 +19,19 @@
 }
 
 body {
-  background: var(--background-primary);
+  background: var(--bg-primary);
   margin: 0;
   padding: 0;
 }
 
 #page-content {
   padding: 2rem;
+}
+
+#page-title {
+  font-size: 3rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
 }
 
 h1,
@@ -36,11 +42,7 @@ h5,
 h6,
 p {
   margin: 0;
-}
-
-#page-title {
-  font-size: 3rem;
-  color: white;
+  font-weight: normal;
 }
 
 input {
@@ -48,11 +50,17 @@ input {
   margin-bottom: 1rem;
   border: none;
   border-radius: 8px;
-  background-color: var(--input-background);
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  font-size: 1rem;
+
+  &::placeholder {
+    color: var(--input-placeholder);
+  }
 }
 
 input.invalid {
-  border: 2px solid var(--error-background);
+  border: 2px solid var(--bg-alert-error);
 }
 
 /* Paper Styles */
@@ -65,22 +73,22 @@ input.invalid {
 }
 
 .paper {
-  background-color: var(--paper);
+  background-color: var(--bg-secondary);
 }
 
 .paper-2 {
-  background-color: var(--paper-2);
+  background-color: var(--bg-tertiary);
 }
 
 .paper-3 {
-  background-color: var(--paper-3);
+  background-color: var(--bg-button);
 }
 
 /* Loader Styles */
 .loader {
   width: 1rem;
   height: 1rem;
-  border: 3px solid #fff;
+  border: 3px solid var(--text-primary);
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
@@ -99,27 +107,24 @@ input.invalid {
 
 /* Error Box */
 .error-box {
-  background-color: var(--error-background) !important;
+  background-color: var(--bg-alert-error) !important;
   border-radius: 8px !important;
 }
 
 .fa-icon {
-  color: red;
   margin-right: 1rem;
 }
 
 /* Link Styling */
 a {
-  color: var(--primary-color); /* Default link color as primary color */
-  text-decoration: none; /* Remove underline */
-  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover state */
+  color: var(--button-primary);
+  text-decoration: none;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 /* Link Hover State */
 a:hover {
-  color: var(
-    --highlight-color
-  ); /* Change text color on hover to ensure good contrast */
+  color: var(--button-primary-hover);
   text-shadow: 0 0 10px #fff;
 }
 
@@ -128,7 +133,7 @@ a:hover {
   position: fixed;
   left: 1rem;
   bottom: 1rem;
-  background-color: #121212;
+  background-color: var(--bg-secondary);
   padding: 2rem;
   border-radius: 1rem;
   animation: arrive 0.3s ease-out normal;
@@ -141,7 +146,7 @@ a:hover {
   }
 
   & > button {
-    color: white;
+    color: var(--text-primary);
   }
 
   & p:first-child {

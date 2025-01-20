@@ -1,26 +1,24 @@
-/* Container for the overall button grid */
 .button-col {
   display: grid;
-  grid-template-rows: repeat(auto-fit, auto); /* Rows sized automatically */
-  gap: 2rem; /* Space between rows */
+  grid-template-rows: repeat(auto-fit, auto);
+  gap: 2rem;
   padding: 1rem;
-  justify-items: left; /* Center the rows horizontally */
+  justify-items: left;
 }
 
-/* Individual button rows */
 .button-row {
   display: flex;
   gap: 4rem;
   align-items: center;
   justify-content: center;
-
-  & > h3 {
-    width: 100px;
-    text-align: center;
-  }
 }
 
-/* Individual button blocks */
+.button-row > h3 {
+  width: 100px;
+  text-align: center;
+  color: var(--primary-text-color);
+}
+
 .button-block {
   display: flex;
   flex-direction: row;
@@ -32,11 +30,13 @@ section {
   padding: 1rem;
   border-radius: 16px;
   margin-bottom: 1rem;
+  background-color: var(--secondary-background);
 }
 
 h2 {
   font-size: 2rem;
   margin-bottom: 1rem !important;
+  color: var(--primary-text-color);
 }
 
 .button-row h3 {
@@ -49,10 +49,10 @@ h2 {
   gap: 4rem;
   justify-content: left;
   align-items: center;
+}
 
-  & > button {
-    flex-grow: 0;
-  }
+#alert-buttons > button {
+  flex-grow: 0;
 }
 
 #reset {

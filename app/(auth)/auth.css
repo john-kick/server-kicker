@@ -1,0 +1,90 @@
+#auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 1rem;
+
+  /* Title styles */
+  & h1 {
+    margin: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+    color: var(--primary-text-color);
+  }
+
+  /* General form layout */
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 24rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* #auth-wrapper form > input:focus,
+#auth-wrapper form > button:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px var(--primary-color);
+} */
+
+/* Placeholder color */
+/* #auth-wrapper form > input::placeholder {
+  color: var(--secondary-text-color);
+} */
+
+/* Button disabled state */
+/* #auth-wrapper form > button:disabled {
+  background-color: var(--input-background);
+  cursor: not-allowed;
+  color: var(--secondary-text-color);
+} */
+
+/* Form wrapper for login and registration */
+#login-form-wrapper,
+#registration-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 24rem;
+}
+
+/* Registration layout, making it flexible for components */
+#registration-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 2rem;
+}
+
+#registration-wrapper > div {
+  width: 100%;
+  max-width: 24rem;
+}
+
+/* Validation box styling */
+.validation-check {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border-radius: 5px;
+  color: var(--primary-text-color);
+}
+
+.validation-check.valid {
+  background-color: var(--success-background);
+}
+
+.validation-check.invalid {
+  background-color: var(--warning-background);
+}
+
+/* ValidationBox should have space between messages */
+.validation-check:not(:last-child) {
+  margin-bottom: 1rem;
+}

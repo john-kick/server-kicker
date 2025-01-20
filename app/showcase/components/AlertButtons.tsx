@@ -30,7 +30,7 @@ export default function AlertButtonsField() {
         </button>
         <button
           onClick={() => showAlert("error", "This is an error alert!", true)}
-          className="alert-button error"
+          className="alert-button danger"
         >
           Error Alert
         </button>

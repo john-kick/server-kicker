@@ -1,11 +1,8 @@
-@import url("./variables.css");
-
-/* Dropdown Styles */
 .dropdown {
   position: relative;
   display: inline-block;
   font-family: "Roboto", serif;
-  color: var(--text-primary); /* Ensure text is visible */
+  color: var(--primary-text-color);
 }
 
 .dropdown .icon {
@@ -14,75 +11,64 @@
   vertical-align: -0.125em;
   margin-right: 0.5em;
   transition: transform 0.1s linear;
-  color: var(--text-primary);
+  color: var(--primary-text-color);
 }
 
 .dropdown.open .icon {
-  transform: rotate(-180deg); /* Icon rotation for dropdown indicator */
+  transform: rotate(-180deg);
 }
 
 .dropdown menu {
   display: none;
   position: absolute;
-  top: 100%; /* Positions the menu below the dropdown trigger */
+  top: 100%;
   left: 0;
   right: 0;
   list-style: none;
   margin: 0;
   padding: 0;
   border-radius: 8px;
-  background-color: var(--dropdown-background);
-  color: var(--text-primary); /* Ensures readable text color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for floating effect */
-  z-index: 10; /* Ensures the dropdown appears above other elements */
-  opacity: 0; /* Initially hidden */
-  visibility: hidden; /* Hidden to prevent interaction */
-  transition: opacity 0.2s ease, visibility 0.2s ease; /* Smooth transition for appearance */
+  background-color: var(--dropdown-bg);
+  color: var(--dropdown-item-text);
+  box-shadow: 0 4px 8px var(--paper-3);
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .dropdown.open menu {
   display: block;
-  position: absolute;
   opacity: 1;
-  visibility: visible; /* Makes dropdown visible */
-  animation: dropdown-fade-in 0.3s ease-out; /* Adds fade-in animation */
+  visibility: visible;
+  animation: dropdown-fade-in 0.3s ease-out;
+  border: 1px solid var(--dropdown-border);
 }
 
 menu li {
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effects */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--dropdown-item-bg);
 }
 
-menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
-  color: var(--primary-color); /* Change text color on hover to match theme */
+menu li:hover,
+menu li:focus {
+  background-color: var(--dropdown-item-hover-bg);
+  color: var(--dropdown-item-text-hover);
 }
 
 menu li:focus {
   outline: none;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.15
-  ); /* Focus effect for better accessibility */
-  color: var(--primary-color); /* Focused item text color */
 }
 
 menu li.disabled {
   cursor: not-allowed;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.05
-  ); /* Dimmed background for disabled items */
-  color: var(--text-secondary); /* Dimmed text color for disabled items */
+  background-color: var(--dropdown-item-disabled-text);
+  color: var(--dropdown-item-disabled-text);
 }
 
-/* Optional: Add animation to menu for smoother appearance */
 @keyframes dropdown-fade-in {
   from {
     opacity: 0;

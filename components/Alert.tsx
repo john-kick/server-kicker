@@ -49,11 +49,7 @@ export default function Alert({
       <div className="alert-icon">{iconMap[type]}</div>
       <div className="alert-content">{children}</div>
       {onDismiss && (
-        <button
-          className="alert-dismiss"
-          onClick={handleDismiss}
-          aria-label="Close"
-        >
+        <button className="text" onClick={handleDismiss} aria-label="Close">
           &times;
         </button>
       )}
