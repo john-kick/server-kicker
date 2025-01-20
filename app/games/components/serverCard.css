@@ -6,6 +6,7 @@
   padding: 2rem;
   background-color: var(--bg-secondary);
   max-width: 400px;
+  transition: 0.3s ease-in-out;
 }
 
 .server-card > *:not(:last-child) {
@@ -13,6 +14,7 @@
 }
 
 .server-card:hover {
+  transition: 0.3s ease-in-out;
   transform: scale(1.05);
   cursor: pointer;
 }

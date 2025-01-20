@@ -30,6 +30,7 @@ export default function Page(): React.JSX.Element {
     event.preventDefault();
 
     if (!isValid) {
+      showAlert("error", "All requirements need to be fulfilled.");
       return;
     }
 
@@ -44,7 +45,7 @@ export default function Page(): React.JSX.Element {
     } catch (err) {
       showAlert(
         "error",
-        err instanceof Error ? err.message : "An unknown error occurred"
+        err instanceof Error ? err.message : "An unknown error occurred."
       );
     }
   };
