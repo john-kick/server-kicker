@@ -1,6 +1,6 @@
 "use client";
 
-import { games } from "@/data/games";
+import { GameData, games } from "@/data/games";
 import { StaticImageData } from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -80,29 +80,25 @@ const servers = [
   }
 ];
 
-export default function GamePage(): React.JSX.Element {
+export default function GamePage(): React.JSX.Element | null {
   const router = useRouter();
-  const params = useParams();
-  const [game, setGame] = useState<{
-    name: string;
-    title: string;
-    image: StaticImageData;
-  } | null>(null);
+  const { name } = useParams();
   const [selectedServer, setSelectedServer] = useState<ServerInfo | null>(null);
 
-  useEffect(() => {
-    if (params?.name) {
-      const foundGame = games.find((g) => g.name === params.name);
-      if (!foundGame) {
-        router.push("/404");
-      } else {
-        setGame(foundGame);
-      }
-    }
-  }, [params?.name, router]);
+  // useEffect(() => {
+  //   if (name && typeof name === "string") {
+  //     const foundGame = games[name];
+  //     if (!foundGame) {
+  //       router.push("/404");
+  //     } else {
+  //       setGame(foundGame);
+  //     }
+  //   }
+  // }, [name, router]);
 
-  if (!game) {
-    return <div>Loading...</div>;
+  if (typeof name !== "string" || !Object.keys(games).includes(name)) {
+    router.push("/404");
+    return null;
   }
 
   // Sort servers so the active server is always first
@@ -120,7 +116,7 @@ export default function GamePage(): React.JSX.Element {
 
   return (
     <>
-      <h1 id="page-title">{game.title}</h1>
+      <h1 id="page-title">{games[name].title}</h1>
       <div className="server-list">
         {sortedServers.map((server) => (
           <ServerCard
@@ -133,6 +129,7 @@ export default function GamePage(): React.JSX.Element {
 
       {selectedServer && (
         <ServerModal
+          game={name}
           info={selectedServer}
           onClose={() => setSelectedServer(null)}
           onSave={handleSaveServerInfo}

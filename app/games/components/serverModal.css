@@ -68,6 +68,8 @@
 /* Style for additional parameters */
 .additional-params {
   margin-top: 1rem;
+  overflow-y: scroll;
+  max-height: 200px;
 }
 
 .additional-params label {

@@ -81,7 +81,7 @@ export default function NavBar(): React.JSX.Element {
             Games
           </button>
           <menu>
-            {games.map(({ name, title }) => (
+            {Object.entries(games).map(([name, { title }]) => (
               <li key={name} onClick={() => handleChooseGame(name)}>
                 <p>{title}</p>
               </li>
