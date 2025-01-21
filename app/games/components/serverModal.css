@@ -1,0 +1,80 @@
+.info-section {
+  padding: 1rem;
+}
+
+.edit-warning {
+  color: var(--text-alert-danger);
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.edit-button,
+.form-actions button {
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: var(--bg-alert-success);
+  color: var(--text-alert-success);
+}
+
+.edit-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.edit-form input,
+.edit-form textarea {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-secondary);
+  border-radius: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.form-actions button {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.form-actions button:hover {
+  background-color: var(--bg-secondary-hover);
+}
+
+/* Button to toggle visibility of additional params */
+.toggle-params-btn {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 1rem;
+}
+
+.toggle-params-btn:hover {
+  color: var(--text-accent);
+}
+
+/* Style for additional parameters */
+.additional-params {
+  margin-top: 1rem;
+}
+
+.additional-params label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.additional-params p {
+  margin: 0.5rem 0;
+}
