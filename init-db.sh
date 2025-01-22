@@ -1,13 +1,13 @@
 #!/bin/bash
-# Wait for the database to be ready
-echo "Waiting for database to be ready..."
-until mysqladmin ping -h "localhost" --silent; do
-  sleep 2
-done
+echo "Running custom initialization script..."
 
-echo "Database is ready. Running initialization script..."
+# Set the MySQL root password to avoid interactive prompt
+export MYSQL_PWD="${MYSQL_ROOT_PASSWORD}"
 
 # Execute the SQL script
-mysql -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < /docker-entrypoint-initdb.d/init-db.sql
+mariadb -u root "${MYSQL_DATABASE}" < /docker-entrypoint-initdb.d/init-db.sql
 
-echo "Database initialization completed."
+# Unset the MySQL password for security
+unset MYSQL_PWD
+
+echo "Custom initialization script completed."

@@ -1,6 +1,4 @@
--- Create a table for each game (replace 'game1' with actual game names)
-
--- Example: Table for 'Game1'
+-- Table for Minecraft server
 CREATE TABLE IF NOT EXISTS `minecraft_servers` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
@@ -13,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `minecraft_servers` (
     `customParam2` VARCHAR(255)
 );
 
--- Example: Table for 'Game2'
+-- Table for Satisfactory server
 CREATE TABLE IF NOT EXISTS `satisfactory_servers` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
@@ -26,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `satisfactory_servers` (
     `customParam2` VARCHAR(255)
 );
 
+-- Table for Wreckfest server
 CREATE TABLE IF NOT EXISTS `wreckfest_servers` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
@@ -37,5 +36,3 @@ CREATE TABLE IF NOT EXISTS `wreckfest_servers` (
     `customParam1` VARCHAR(255),
     `customParam2` VARCHAR(255)
 );
-
--- Additional tables for other games would be added similarly

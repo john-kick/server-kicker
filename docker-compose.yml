@@ -1,7 +1,6 @@
 services:
   db:
     image: mariadb:latest
-    container_name: mariadb-server
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -13,7 +12,6 @@ services:
       - mariadb_data:/var/lib/mysql
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
       - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
-    command: ["bash", "/docker-entrypoint-initdb.d/init-db.sh"]
     restart: always
 
 volumes:
