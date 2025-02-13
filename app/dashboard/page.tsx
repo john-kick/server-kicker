@@ -13,7 +13,7 @@ export default function Page(): React.JSX.Element {
 
   return (
     <div>
-      {games.map(({ name, title, image }) => (
+      {Object.entries(games).map(([name, { image, title }]) => (
         <GameCard
           key={name}
           img={image}

@@ -52,33 +52,28 @@ export default function ServerModal({
 
   if (!selectedGameData) return <p>Loading...</p>;
 
-  console.log(selectedGameData);
-
   const additionalConfiguration = (
-    <div>
+    <>
       {Object.entries(selectedGameData.parameters).map(
         ([identifier, sections]) => (
-          <>
-            <section key={identifier}>
-              <h3>{sections.identifier}</h3>
-              {sections.config.map(({ id, type, title, options }) => (
-                <>
-                  <p>
-                    {title}: {type}
-                  </p>
-                  {options && <p>{options.join(",")}</p>}
-                </>
-              ))}
-            </section>
-          </>
+          <section key={identifier}>
+            <h3>{sections.identifier}</h3>
+            {sections.config.map(({ id, type, title, options }) => (
+              <div key={id}>
+                <p>
+                  {title}: {type}
+                </p>
+                {options && <p>{options.join(",")}</p>}
+              </div>
+            ))}
+          </section>
         )
       )}
-    </div>
+    </>
   );
 
   return (
-    <Modal title={isEditing ? "Edit Server" : name} onClose={onClose}>
-      <p>ID: {id}</p>
+    <Modal title={name} secondaryTitle={`(${id})`} onClose={onClose}>
       <div className="info-section">
         <div className="game-info"></div>
         {!isEditing ? (

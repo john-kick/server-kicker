@@ -1,17 +1,13 @@
 .info-section {
-  padding: 1rem;
 }
 
 .edit-warning {
   color: var(--text-alert-danger);
   font-weight: bold;
-  margin-top: 1rem;
 }
 
 .edit-button,
 .form-actions button {
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -25,13 +21,10 @@
 .edit-form label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
 }
 
 .edit-form input,
 .edit-form textarea {
-  margin-top: 0.5rem;
-  padding: 0.5rem;
   border: 1px solid var(--border-secondary);
   border-radius: 0.5rem;
 }
@@ -58,7 +51,6 @@
   border: none;
   cursor: pointer;
   text-decoration: underline;
-  margin-top: 1rem;
 }
 
 .toggle-params-btn:hover {
@@ -67,16 +59,11 @@
 
 /* Style for additional parameters */
 .additional-params {
-  margin-top: 1rem;
-  overflow-y: scroll;
-  max-height: 200px;
 }
 
 .additional-params label {
   display: block;
-  margin-bottom: 0.5rem;
 }
 
 .additional-params p {
-  margin: 0.5rem 0;
 }

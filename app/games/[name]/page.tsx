@@ -1,11 +1,10 @@
 "use client";
 
-import { GameData, games } from "@/data/games";
-import { StaticImageData } from "next/image";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import ServerCard from "../components/ServerCard";
+import { games } from "@/data/games";
 import ServerInfo from "@/types/ServerInfo";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import ServerCard from "../components/ServerCard";
 import ServerModal from "../components/ServerModal";
 
 const servers = [

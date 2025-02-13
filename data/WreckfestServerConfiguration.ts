@@ -1,9 +1,9 @@
 import { ServerConfigList } from "@/types/ServerConfiguration";
 
-const wreckfestServerConfigs: {
-  [section: string]: ServerConfigList;
-} = {
-  // The Satisfactory server configuration is done in-game
-};
+export type WreckfestServerConfigKey = undefined;
+
+const wreckfestServerConfigs: ServerConfigList<WreckfestServerConfigKey>[] = [
+  // The Wreckfest server configuration is done in-game
+];
 
 export default wreckfestServerConfigs;

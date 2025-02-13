@@ -1,18 +1,31 @@
+import React from "react";
+
 type ModalProps = {
   title: string;
+  secondaryTitle?: string;
   children: React.ReactNode;
   onClose: () => void;
 };
 
-export default function Modal({ title, children, onClose }: ModalProps) {
+export default function Modal({
+  title,
+  secondaryTitle,
+  children,
+  onClose
+}: ModalProps) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <h2>{title}</h2>
+        <div className="modal-header">
+          <h2 className="title">{title}</h2>
+          {secondaryTitle && (
+            <p className="secondary-title">{secondaryTitle}</p>
+          )}
+        </div>
         <div className="modal-content">{children}</div>
-        <button className="modal-close" onClick={onClose}>
-          Close
-        </button>
+        <div className="modal-footer">
+          <button onClick={onClose}>Close</button>
+        </div>
       </div>
     </div>
   );

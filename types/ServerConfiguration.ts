@@ -1,11 +1,13 @@
-export type ServerConfig = {
-  id: string;
+type Config<T> = {
+  id: T;
   title: string;
   type: "string" | "number" | "boolean" | "enum" | "json";
+  standard?: any;
   options?: string[];
+  tooltip?: string;
 };
 
-export type ServerConfigList = {
+export type ServerConfigList<T> = {
   identifier: string;
-  config: ServerConfig[];
+  config: Config<T>[];
 };
