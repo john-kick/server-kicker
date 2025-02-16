@@ -10,14 +10,14 @@ CREATE TABLE IF NOT EXISTS `minecraft_servers` (
     `gamemode` ENUM('survival', 'creative', 'adventure', 'spectator') DEFAULT 'survival',
     `force_gamemode` BOOLEAN DEFAULT FALSE,
     `generate_structures` BOOLEAN DEFAULT TRUE,
-    `generator_settings` LONGTEXT,  -- Removed DEFAULT '{}'
+    `generator_settings` LONGTEXT DEFAULT '{}', 
     `hardcore` BOOLEAN DEFAULT FALSE,
     `level_seed` VARCHAR(255) DEFAULT '',
     `level_type` ENUM('default', 'flat', 'largeBiomes', 'amplified', 'buffet') DEFAULT 'default',
     `max_world_size` INT DEFAULT 29999984,
     `spawn_protection` INT DEFAULT 16,
     `player_idle_timeout` INT DEFAULT 0,
-    `white_list` BOOLEAN DEFAULT FALSE,  -- Removed duplicate
+    `white_list` BOOLEAN DEFAULT FALSE,
     `hide_online_players` BOOLEAN DEFAULT FALSE,
     `pvp` BOOLEAN DEFAULT TRUE,
     `spawn_animals` BOOLEAN DEFAULT TRUE,
