@@ -32,7 +32,7 @@ export class ServerController {
 
     const db = new MariaDBClient();
     try {
-      const result = await db.query(query, values);
+      const result = await db.query<{ insertId: number }>(query, values);
       return result.insertId;
     } catch (error) {
       console.error("Error creating server:", error);
@@ -40,13 +40,16 @@ export class ServerController {
     }
   }
 
-  async getServerById(game: string, id: number): Promise<any> {
+  async getServerById(
+    game: string,
+    id: number
+  ): Promise<Record<string, any> | null> {
     const tableName = this.getServerTableName(game);
     const query = `SELECT * FROM ${tableName} WHERE id = ?`;
 
     const db = new MariaDBClient();
     try {
-      const result = await db.query(query, [id]);
+      const result = await db.query<Record<string, any>[]>(query, [id]);
       return result.length ? result[0] : null;
     } catch (error) {
       console.error("Error fetching server:", error);
@@ -54,13 +57,16 @@ export class ServerController {
     }
   }
 
-  async getAllServers(game: string): Promise<any[]> {
+  async getAllServers(game: string): Promise<number[]> {
     const tableName = this.getServerTableName(game);
-    const query = `SELECT * FROM ${tableName}`;
+    const query = `SELECT id FROM ${tableName}`;
 
     const db = new MariaDBClient();
+
     try {
-      return await db.query(query);
+      return (await db.query<{ id: number }[]>(query)).map(
+        (server) => server.id
+      );
     } catch (error) {
       console.error("Error fetching all servers:", error);
       throw error;

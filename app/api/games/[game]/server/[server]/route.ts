@@ -1,23 +1,6 @@
 import { ServerController } from "@/controllers/ServerController";
-import minecraftServer from "@/data/api-test-data/minecraftServer";
-import satisfactoryServer from "@/data/api-test-data/satisfactoryServer";
-import wreckfestServer from "@/data/api-test-data/wreckfestServer";
 import { games as gameServers } from "@/data/games";
-import { MinecraftServerConfigKey } from "@/data/MinecraftServerConfiguration";
-import { SatisfactoryServerConfigKey } from "@/data/SatisfactoryServerConfiguration";
-import { WreckfestServerConfigKey } from "@/data/WreckfestServerConfiguration";
 import { NextRequest, NextResponse } from "next/server";
-
-type ServerConfigKey =
-  | MinecraftServerConfigKey
-  | SatisfactoryServerConfigKey
-  | WreckfestServerConfigKey;
-
-const gamesMap: Record<string, Record<ServerConfigKey, any>> = {
-  minecraft: minecraftServer,
-  satisfactory: satisfactoryServer,
-  wreckfest: wreckfestServer
-};
 
 const serverController = new ServerController();
 
@@ -27,20 +10,24 @@ export async function GET(
 ) {
   const { game, server } = await context.params;
 
-  if (!gameServers[game]) {
-    return NextResponse.json({ error: "Game not found" }, { status: 404 });
+  const serverId = parseInt(server, 10);
+  if (isNaN(serverId)) {
+    return NextResponse.json({ error: "Invalid server ID" }, { status: 400 });
   }
 
-  const gameServer = gamesMap[game];
+  try {
+    const serverData = await serverController.getServerById(game, serverId);
+    if (!serverData) {
+      return NextResponse.json({ error: "Server not found" }, { status: 404 });
+    }
 
-  if (!gameServer || !(server in gameServer)) {
-    return NextResponse.json({ error: "Server not found" }, { status: 404 });
+    return NextResponse.json(serverData, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({
-    id: server,
-    params: gameServer[server as keyof typeof gameServer]
-  });
 }
 
 export async function PATCH(

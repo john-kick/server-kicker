@@ -4,17 +4,28 @@ import { ServerController } from "@/controllers/ServerController";
 
 const serverController = new ServerController();
 
+const supportedGames = ["minecraft", "satisfactory", "wreckfest"];
+
 export async function GET(
   request: NextRequest,
   { params }: { params: PromiseLike<{ game: string }> }
 ) {
   const { game } = await params;
 
-  if (game !== "minecraft") {
+  if (!supportedGames.includes(game)) {
     return NextResponse.json({ error: "Game not supported" }, { status: 404 });
   }
 
-  return NextResponse.json(Object.keys(minecraftServer));
+  try {
+    const server = await serverController.getAllServers(game);
+
+    return NextResponse.json(server, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(

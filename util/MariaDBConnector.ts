@@ -25,7 +25,7 @@ export class MariaDBClient {
     }
   }
 
-  async query(sql: string, params?: any[]): Promise<any> {
+  async query<T>(sql: string, params?: any[]): Promise<T> {
     let conn: mariadb.Connection | null = null;
     try {
       conn = await this.getConnection();
