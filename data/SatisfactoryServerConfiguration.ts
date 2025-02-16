@@ -1,6 +1,6 @@
 import { ServerConfigList } from "@/types/ServerConfiguration";
 
-export type SatisfactoryServerConfigKey = undefined;
+export type SatisfactoryServerConfigKey = "satisfactory";
 
 const satisfactoryServerConfigs: ServerConfigList<SatisfactoryServerConfigKey>[] =
   [
